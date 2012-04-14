@@ -1,0 +1,202 @@
+// JavaScript Document
+var myElement = document.getElementById("menuDiv");
+var selected = null;
+var subSelected = null;
+var subSelectedItem = null;
+var selectedContent = "Home";
+var selectedBio = null;
+function menuHeadClick (me){
+		if (selected != me) {
+			$(selected).toggleClass("menuHeadSelected");
+			$(me).toggleClass("menuHeadSelected");
+		}
+		selected = me;
+		$(".subMenu").slideUp(800);
+}
+function submenuHeadClick (me) {
+	if (selected != me) {
+			$(selected).toggleClass("menuHeadSelected");
+			$(me).toggleClass("menuHeadSelected");
+			$(subSelected).slideUp(800);
+		}
+		selected = me;
+		subSelected ="#"+me.id+"Sub";
+		$(subSelected).slideDown(800);	
+}
+function submenuItemClick (me) {
+	if (subSelectedItem!= me) {
+		$(subSelectedItem).toggleClass("subItemSelected");
+		$(me).toggleClass("subItemSelected");		
+	}
+	subSelectedItem= me;		
+}
+
+function hideOthers(me) {
+	if (selectedContent !== me.id) {
+		$("."+selectedContent+"Content").hide(1000);
+		if (subSelectedItem!= me) {
+			$(subSelectedItem).toggleClass("subItemSelected");
+			subSelectedItem= null;
+		}
+	}
+	selectedContent = me.id;		
+}
+
+
+
+$(document).ready(function() {
+	$(".subMenuItem").css("display","block");
+	$(".subMenu").hide(0);
+	$(".menuHead, .subMenuItem").hover(function() {		
+		$(this).toggleClass("hoverOn");
+	});
+
+
+	// Function to handle non submenu heads being clicked
+
+	
+	// Click Handling For Menu Items
+	$(".menuHead").click(function() {
+			if (selected == null)
+				selected = this.id;
+			console.log(this);
+			console.log(this.id);	
+			switch(this.id) {
+				case "Home": 
+					menuHeadClick(this);
+					hideOthers(this);
+					$(".HomeContent").show(1000);
+					break;
+				case "Australia": 
+					submenuHeadClick(this);
+					
+					break;
+				case "Bahamas": 
+					submenuHeadClick(this);
+					break;
+				case "California": 
+					submenuHeadClick(this);
+					hideOthers(this);
+					$(".CaliforniaContent").show(1000);
+					break;
+				case "France": 
+					submenuHeadClick(this);
+					break;
+				case "JoshuaTree": 
+					//submenuHeadClick(this);
+					menuHeadClick(this);
+					hideOthers(this);
+					$(".JoshuaTreeContent").show(1000);
+					break;
+				case "London": 
+					//submenuHeadClick(this);
+					menuHeadClick(this);
+					hideOthers(this);
+					$(".LondonContent").show(1000);
+					break;
+				case "MarthasVineyard": 
+					//submenuHeadClick(this);
+					menuHeadClick(this);
+					hideOthers(this);
+					$(".MarthasVineyardContent").show(1000);
+					break;
+				case "NewYorkCity": 
+					//submenuHeadClick(this);
+					menuHeadClick(this);
+					hideOthers(this);
+					$(".NewYorkCityContent").show(1000);
+					break;
+				case "NewZealand": 
+					//submenuHeadClick(this);
+					menuHeadClick(this);
+					hideOthers(this);
+					$(".NewZealandContent").show(1000);
+					break;
+				case "Weddings": 
+					//submenuHeadClick(this);
+					menuHeadClick(this);
+					hideOthers(this);
+					$(".WeddingsContent").show(1000);
+					break;
+				case "Timelapses": 
+					submenuHeadClick(this);
+					hideOthers(this);
+					$(".TimelapsesContent").show(1000);
+					break;
+				case "AboutUs": 
+					//submenuHeadClick(this);
+					menuHeadClick(this);
+					hideOthers(this);
+					$(".AboutUsContent").show(1000);
+					break;
+				case "ContactUs": 
+					submenuHeadClick(this);
+					hideOthers(this);
+					$(".ContactUsContent").show(1000);
+					break;
+			}});	
+			
+	$(".subMenuItem").click(function() {
+		/* Check to see if another sub menu has been selected */
+		if (subSelectedItem== null) 
+			subSelectedItem= this.id;
+		switch(this.id) {
+			case "AustraliaUnderwater": 
+				submenuItemClick(this);
+				hideOthers(this);
+				$(".AustraliaUnderwaterContent").show(1000);
+				selectedContent = "AustraliaUnderwater";
+				break;
+			case "AustraliaPlaces": 			
+				submenuItemClick(this);
+				hideOthers(this);
+				$(".AustraliaPlacesContent").show(1000);
+				selectedContent = "AustraliaPlaces";
+				break;
+			case "AustraliaWildlife": 			
+			submenuItemClick(this);
+			hideOthers(this);
+			$(".AustraliaWildlifeContent").show(1000);
+			selectedContent = "AustraliaWildlife";
+			break;
+			case "BahamasUnderwater": 
+				submenuItemClick(this);
+				hideOthers(this);
+				$(".BahamasUnderwaterContent").show(1000);
+				selectedContent = "BahamasUnderwater";
+				break;
+			case "BahamasPlaces": 			
+				submenuItemClick(this);
+				hideOthers(this);
+				$(".BahamasPlacesContent").show(1000);
+				selectedContent = "BahamasPlaces";
+				break;	
+			case "Etretat": 
+				submenuItemClick(this);
+				hideOthers(this);
+				$(".EtretatContent").show(1000);
+				selectedContent = "Etretat";
+				break;
+			case "Honfleur": 			
+				submenuItemClick(this);
+				hideOthers(this);
+				$(".HonfleurContent").show(1000);
+				selectedContent = "Honfleur";
+				break;
+			case "Paris": 			
+			submenuItemClick(this);
+			hideOthers(this);
+			$(".ParisContent").show(1000);
+			selectedContent = "Paris";
+			break;
+			
+			case "Contacts": 			
+				submenuItemClick(this);
+				hideOthers(this);
+				$(".ContactUsContent").show(1000);
+				selectedContent = "ContactUs";
+				break;
+			
+		}});
+
+});

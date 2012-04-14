@@ -1,0 +1,228 @@
+# This file is created by JAlbum. It sets custom file filtering and ordering for this image directory.
+# Each row indicate a file and it's order. Files not listed here are added to the end of the album
+# Rows beginning with "-" indicate excluded files.
+# Rows containing a tab character indicate links, where the text before the tab is the logical file name
+# and the path to the right is the target path.
+# Note: This file allows absolute paths to files and directories in other locations and thereby
+# allows you to compile albums consisting of files from several different locations.
+
+001 Australia Underwater Jellyfish Illuminated.jpg
+002 New York City Lightning.jpg
+003 Australia Places Dockhouse Swan River .jpg
+004 Australia Wildlife Kangaroo Eye.jpg
+005 Australia Underwater Red-Barred Rock Cod.jpg
+006 Highbourne Cay Lionfish.jpg
+007 Cat Cay Star Palm.jpg
+008 Honfleur at Night 2.jpg
+009 Australia Places Boardwalk at Scarborough.jpg
+010 Australia Places Cottesloe Building.jpg
+011 Australia Places Dock at Blackwood Lake.jpg
+012 London Red Building.jpg
+013 Australia Places Dunes at Lancelin Black and White.jpg
+014 Australia Underwater Grey Nurse Shark.jpg
+015 Australia Places Dunes at Lancelin.jpg
+016 Australia Places Helicopter View of the Great Barrier Reef.jpg
+017 Cat Cay Trigger Closeup.jpg
+018 Australia Places Pink Lake.jpg
+019 Hamilton Icicle Brick.jpg
+020 Australia Places Pinnacles Sunset.jpg
+021 Australia Places View from Augusta Lighthouse.jpg
+022 Australia Places View of Heron Island.jpg
+023 Australia Underwater Black and White Chain.jpg
+024 Australia Underwater Boat.jpg
+025 Australia Underwater Giant Clam.jpg
+026 Australia Underwater Green Sea Turtle Gliding.jpg
+027 Australia Underwater Jellyfish.jpg
+028 Australia Underwater Pink Anenome Fish.jpg
+029 Australia Wildlife Kangaroo Sleeping.jpg
+030 Australia Places Dunes of Lancelin Black and White.jpg
+031 Australia Wildlife Lone Dolphin in Monkey Mia.jpg
+032 Australia Wildlife Miniature Skink.jpg
+033 Australia Wildlife Peacock - Upclose .jpg
+034 Australia Wildlife Sleeping Koala Black and White.jpg
+035 Cat Cay Aerial View 2.JPG
+036 Cat Cay Aerial View 5.jpg
+037 Cat Cay Dock.jpg
+038 Cat Cay Trumpet Fish 1.jpg
+039 Cat Cay Wreck Engine Room.jpg
+040 Etretat Rock 2.jpg
+041 Etretat Rock 3.jpg
+042 Hamilton Fireworks 2.JPG
+043 Hamilton Icicle 2.jpg
+044 Highbourne Cay Airplane Wreck Black and White.jpg
+045 Highbourne Cay Conch Shells.jpg
+046 Highbourne Cay Neon Goby Cleaning Close Up.jpg
+047 Highbourne Cay Nurse Shark.jpg
+048 Highbourne Cay Ocean Beach III.jpg
+049 Highbourne Cay Reef Shark Half and Half.jpg
+050 Highbourne Cay Reef Shark I.jpg
+051 Highbourne Cay Rock with Sea Fans.jpg
+052 Highbourne Cay Underwater Panorama.jpg
+053 Honfleur at Night 1.jpg
+054 Honfleur at Night 5.jpg
+055 Honfleur Church III.JPG
+056 Honfleur Sign.JPG
+057 Joshua Tree Mountain Pier.jpg
+058 London Doors 1.jpg
+059 London Hallway.jpg
+060 London Lion 2.jpg
+061 London Ritz Silhouettes.JPG
+062 London Sign.jpg
+063 London Taxi.jpg
+064 Marthas Vineyard Beach Path at Sunset.jpg
+065 Marthas Vineyard Beach View.jpg
+066 Marthas Vineyard Starfish on Deck.jpg
+067 Marthas Vineyard SweetStars.JPG
+068 Mountain Panorama II.jpg
+069 New York City Horse Cops.jpg
+070 New York City Hudson Fireworks III.jpg
+071 New York City NYC PANO Online.JPG
+072 New York City Times Square Hustle II.jpg
+073 New Zealand Curious Sheep.jpg
+074 New Zealand Glenorchy Half Shot.jpg
+075 New Zealand Grazing Sheep.jpg
+076 Paris Eiffel Tower at Night 4.jpg
+077 Paris Eiffel Tower at Night 6.jpg
+078 San Francisco  Street Art.jpg
+079 San Francisco Alcatraz Island.jpg
+080 San Francisco Bay Bridge 2.jpg
+081 San Francisco Gay Pride Parade Eyes.jpg
+082 San Francisco Golden Gate.jpg
+083 San Francisco Street Flowers.jpg
+084 Wedding - Brittany 007.jpg
+085 Australia Places Bigurda Trail - Long Exposure.jpg
+086 Australia Places Blackwood Lake Panorama.jpg
+087 Australia Places Cairns Palm Tree II.jpg
+088 Australia Places Cliffs at Albany.jpg
+089 Australia Places Coral Bay Beach.JPG
+090 Australia Places Cottesloe Rock.jpg
+091 Australia Places Helicopter View of the Great Barrier Reef II.jpg
+092 Australia Places Lighthouse - View 1.jpg
+093 Australia Places Lonely Yellow Leaf.jpg
+094 Australia Places University of Western Australia.jpg
+095 Australia Places Waves Crashing at Cairns.jpg
+096 Australia Places Wreck at Heron Island.jpg
+097 Australia Places Yellow Wild Flower Field.jpg
+098 Australia Underwater Cherry Blossom Coral.jpg
+099 Australia Underwater Copperband Butterfly.jpg
+100 Australia Underwater Feather Duster.jpg
+101 Australia Underwater Giant Clam III.jpg
+103 Australia Underwater Pink Anenome Fish II .jpg
+104 Australia Underwater Purple Tipped Anenome.jpg
+105 Australia Underwater Red Bass.jpg
+106 Australia Underwater Sailfish Tang.jpg
+107 Australia Underwater School.jpg
+108 Australia Underwater Turtle Sun 2.jpg
+109 Australia Underwater Turtle Sun.jpg
+110 Australia Underwater Weedy Leatherjacket.jpg
+111 Australia Wildlife Cuckatoo in Motion.jpg
+112 Australia Wildlife Dolphin and Pelican.jpg
+113 Australia Wildlife Kangaroo and Joey.jpg
+114 Australia Wildlife Kangaroo Black and White.jpg
+115 Australia Wildlife Kangaroo Vertical.jpg
+116 Australia Wildlife Mother and Child Dugong.jpg
+117 Australia Wildlife Parrot in Front of Sydney .jpg
+118 Australia Wildlife Parrots at Cottesloe.jpg
+119 Australia Wildlife Pelican in Monkey Mia.jpg
+120 Australia Wildlife Seal and Pelican II.jpg
+121 Australia Wildlife Sleeping Koala 2.jpg
+122 Australia Wildlife Sleepy Koala.jpg
+123 Australia Wildlife Swimming Seals copy.jpg
+124 Cat Cay Aerial View 1.jpg
+125 Cat Cay Aerial View 4.jpg
+126 Cat Cay Barracuda 2.jpg
+127 Cat Cay Coral.jpg
+128 Cat Cay Palm at Night.jpg
+129 Cat Cay Palm Tree Road.jpg
+130 Cat Cay Palm Tree.jpg
+131 Cat Cay Queen Trigger 2.jpg
+132 Cat Cay Sea Fans.jpg
+133 Cat Cay Stingray Eye Closeup.jpg
+134 Cat Cay Sunset.jpg
+135 Cat Cay Tuna.jpg
+136 Cat Cay Wreck.jpg
+137 Elkhorn.jpg
+138 Etretat Grassy Hills.jpg
+139 Etretat Grassy Rock.JPG
+140 Etretat Grassy Sign.jpg
+141 Etretat Rock 1.jpg
+142 Fire II.jpg
+143 Hamilton Building.JPG
+144 Hamilton Farmhouse.jpg
+145 Hamilton Icicle Collage.jpg
+146 Hamilton Star Trails.jpg
+147 Hamilton Statue.jpg
+148 Highbourne Cay Clouds at Sunset.JPG
+149 Highbourne Cay Diagonal Split Sail.jpg
+150 Highbourne Cay Fish Pier.jpg
+151 Highbourne Cay Nurse Shark II.jpg
+152 Highbourne Cay Reef Shark Black and White.jpg
+153 Highbourne Cay Reef Shark IV.jpg
+154 Highbourne Cay Rock Wall at Highbourne Cay.jpg
+155 Highbourne Cay Rock Wall Sunset Panorama.jpg
+156 Highbourne Cay Sailboat and Stars .JPG
+157 Highbourne Cay Seafan with Fish.jpg
+158 Highbourne Cay Sharks at Sunset III.jpg
+159 Highbourne Cay Sharpnose Puffer.jpg
+160 Highbourne Cay Stingray.jpg
+161 Honfleur at Night 3.jpg
+162 Honfleur at Night 4.jpg
+163 Honfleur Candles.jpg
+164 Honfleur Dog.JPG
+165 Honfleur Door 2.jpg
+166 Honfleur Door 3.jpg
+167 Honfleur Door.jpg
+168 Joshua Tree Landscape.jpg
+169 Joshua Tree Mountain and Tree.jpg
+170 London Pillars.jpg
+171 London Ritz 2.jpg
+172 Lonson Phone Booth.jpg
+173 Martha's Vineyard Clouds and Flowers.jpg
+174 Martha's Vineyard Path Panormaa.jpg
+175 Marthas Vineyard Aerial View 2.jpg
+176 Marthas Vineyard Aerial View.JPG
+177 Marthas Vineyard Cloud Formations.jpg
+178 Marthas Vineyard Field of Flowers Panorama.jpg
+179 Marthas Vineyard Foggy Beach 1.jpg
+180 Marthas Vineyard Green Dunes.jpg
+181 Marthas Vineyard Moody Clouds.jpg
+182 Marthas Vineyard Scattered Sailboats.jpg
+183 Marthas Vineyard Sunny Day.JPG
+184 Marthas Vineyard Sunrise.jpg
+185 Marthas Vineyard Sunset.JPG
+186 New York City Bridge Panorama.jpg
+187 New York City Brooklyn Bridge Black and White.jpg
+188 New York City Brooklyn Bridge Perspective.jpg
+189 New York City Building Silhouettes.jpg
+190 New York City Downtown at Night.jpg
+191 New York City Fog at Night.jpg
+192 New York City Hudson Sunset II.jpg
+193 New York City Night Blur.jpg
+194 New York City Stars at Time Warner.jpg
+195 New York City Taxis at Times Square.jpg
+196 New York City Times Square Hustle.jpg
+197 New Zealand Curious Cows Panorama.jpg
+198 New Zealand Glenorchy Panorama II copy.jpg
+199 New Zealand Gondolas.jpg
+200 New Zealand Lonely Sheep.jpg
+201 New Zealand Mountains and Clouds.jpg
+202 New Zealand Queenstown Driving Green Panorama.jpg
+203 New Zealand Queenstown Illuminated.jpg
+204 New Zealand Queenstown View.jpg
+205 New Zealand Resting Sheep.jpg
+206 New Zealand Sheep in the Middle.jpg
+207 NewZealand Queenstown.jpg
+208 Paris Clock.JPG
+209 Paris Eiffel Tower at Night 5.jpg
+210 Paris Flower Fence.JPG
+211 San Francisco  Dock BW.jpg
+212 San Francisco Gay Pride Parade 2.jpg
+213 San Francisco Gay Pride Parade 4.jpg
+214 San Francisco Ghiradelli.jpg
+215 San Francisco Golden Gate Fog 3.jpg
+216 San Francisco Golden Gate Fog.jpg
+217 Star Trails Marthas Vineyard Beach Path.jpg
+218 Star Trails Texas Lake.JPG
+219 Wedding - Brittany 003.jpg
+220 Wedding - Brittany 011.jpg
+221 Wedding - Brittany 014.jpg

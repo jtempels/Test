@@ -1,0 +1,82 @@
+***********************************************************************
+Settings To Change:
+***********************************************************************
+
+Galleria: Light
+-GENERAL
+-don't show album title, description, section divider lines
+-remove border from image
+-THUMBNAILS
+-14 visible
+-remove borders from thumbnail icons and selected
+-CAPTIONS
+-Uncheck image captions and download link
+-FOLDERS
+-Uncheck all folders
+-SLIDESHOW
+-enable slide show
+
+In Dreamweaver
+Get rid of footer
+Make main top -50, left -100
+Move middle container to the top
+Move scroll bar
+Change fast steps to number of icons visible
+
+
+IMAGES
+-Scaling Mode - Smooth
+-JPEG Quality 100
+-Thumbnails 40x40
+Images -600x480
+
+***********************************************************************
+Notes:
+***********************************************************************
+
+Delete Original Files to make folder smaller! Check out differnet qualities...
+Move index to root folder and rename to album name
+Move thumbs and images to appropriate folder
+
+Make icons 40x40
+Main image: 640x480?
+14 Thumnbails 
+
+Get rid of footer
+Move middle container to right below main div. Get rid of clears
+Make iframe width:100% height: 680 scrolling: "no" overflow: "hidden"
+
+***********************************************************************
+ADDING NEW PHOTOS:
+***********************************************************************
+
+ADD THE CREATED PHOTO FROM THE INDEX.HTML TO THE ONE YOU WANT TO ADD:
+
+Example: Take this and add it with the rest.... think I'm going to add
+a directory to res
+
+<li class="">
+						
+						<a href="slides/Red Building.jpg" title="">
+							<img src="thumbs/test/Red Building.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+						</a>
+						<span>width:640;;height:425</span>
+					</li>
+
+YUP that works well. 
+
+***********************************************************************
+***********************************************************************
+
+
+Investigate:
+Fast scrolladd 
+
+Slideshows
+	image.css("display", "none").fadeIn(1500);
+						setTimeout(function() {image.fadeOut(1500)},3000);
+	Change slide show duration: think I have it around 5000 or 5500 ms					
+						
+
+Right arrow on scroll
+Home screen album with no thumb: thumbs to 0px and scroller display: none

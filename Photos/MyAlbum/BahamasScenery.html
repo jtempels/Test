@@ -1,0 +1,900 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">	
+	<head>
+		<title>Bahamas Scenery</title>
+				
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="title" content="Bahamas Scenery" />
+<meta name="keywords" content="Bahamas Scenery, Bahamas Scenery, jAlbum 10, Galleria" />
+<meta name="description" content="Bahamas Scenery" />
+<meta property="og:title" content="Bahamas Scenery" />
+<meta property="og:site_name" content="Jalbum" />
+<meta property="fb:app_id" content="140299612674733" />
+		<link href="res/galleria/galleria.css" rel="stylesheet" type="text/css" />
+		<link href="res/index.css" rel="stylesheet" type="text/css" />		
+		<link href="res/common.css" rel="stylesheet" type="text/css" />
+		<style type="text/css">
+	.thumbnails li {
+		width: 40px;
+		height: 40px;
+	}
+
+	#middle_container {
+		height: 510px;
+	}
+
+	#scroller_container {
+		margin-top: 20px;
+		margin-bottom: 10px;
+		width: 892px;	
+	}
+
+	#image_scroller {
+		margin: 0 10px 0 20px;
+		width: 702px;
+	}
+	
+	#thumbnails_container {
+		width: 3802px;
+	}
+	
+	#scroller_container,
+	#image_scroller,
+	#thumbnails_container {
+		height: 52px;
+	}
+	
+	#folders_container {
+		;
+	}		
+	
+	.folders {
+		width: 0px;
+	}
+	
+	.folders li {
+		width: 56px;
+		height: 56px;
+	}
+	
+	.caption,
+	.description {
+		width: 702px;
+	}
+</style>
+		<script src="res/jquery.js" type="text/javascript"></script>
+			<script src="res/jquery.hotkeys.js" type="text/javascript"></script>
+	<script src="res/galleria/jquery.galleria.js" type="text/javascript"></script>
+	<script src="res/jquery.scrollimages.js" type="text/javascript"></script>	
+	<script type="text/javascript"><!--//--><![CDATA[//><!--	
+		$(function() {
+			$("#thumbnails_container").imageScroller({
+				onBeforeScroll: function() { $.galleria.stop() },
+				onScroll: function() { $.galleria.start() }, 
+				duration: 120, 
+				imageWidth: 50, 
+				size: 14,
+				fastSteps: 14
+			});
+			
+			var formattedThumbnailOpacity = 67/100;
+			
+			$(".thumbnails_unstyled").addClass("thumbnails");
+			$("ul.thumbnails").galleria({
+				history: false,
+				clickNext: true,
+				insert: "#main_image",
+				onImage: function(image, caption, thumb) {
+					var extras = $("#extras").css("display", "none").empty();
+					image.css("display", "none").fadeIn(1006);
+					caption.css("display", "none").fadeIn(1006);
+					
+					if (false) {
+						var extrasList = $("<ul></ul>");
+						extrasList.addMetadata("Date", thumb.data("originalDate"));
+						extrasList.addMetadata("Camera", thumb.data("cameraModel"));
+						extrasList.addMetadata("Exposure time", thumb.data("exposureTime"));
+						extrasList.addMetadata("ISO", thumb.data("isoEquivalent"));
+						extrasList.addMetadata("Aperture", thumb.data("aperture"));
+						extrasList.addMetadata("Focus distance", thumb.data("focusDistance"));
+						extrasList.addMetadata("Focal length", thumb.data("focalLength35mm"));
+						extrasList.addMetadata("Keywords", thumb.data("keywords"));
+						if (extrasList.children().length > 0) {
+							extras.append(extrasList);						
+							extrasList.find(":first-child").addClass("first");
+							extras.css({ 
+								width : (image.outerWidth() - (5 * 2) + 100) + "px" 
+							}).fadeIn(1006);
+						}
+					}
+					
+					var li = thumb.parents("li");
+					li.siblings().children("img.selected").fadeTo(500, formattedThumbnailOpacity);
+					thumb.fadeTo("fast", 1).addClass("selected");
+					image.attr("title", "Next image");
+					
+					var original = thumb.data("original");
+					if (original) {
+						var originalLink = $("<a></a>").attr("href", original).text("Download original");
+						caption.append(" (").append(originalLink).append(")");
+					}
+				},
+				onThumb: function(thumb) {
+					var li = thumb.parents("li");
+					var fadeTo = li.is(".active") ? "1" : formattedThumbnailOpacity;
+					thumb.css({display: "none", opacity: fadeTo}).fadeIn(1500);
+					thumb.hover(
+						function() { 
+							thumb.fadeTo("fast", 1);		
+						},
+						function() {
+							li.not(".active").children("img").fadeTo("fast", formattedThumbnailOpacity);
+						}
+					)
+				},
+				preloads: 3,
+				fastSteps: 14,
+				onPrev: function() {
+					$.imageScroller.scrollLeft();
+				},
+				onNext: function() {
+					$.imageScroller.scrollRight();
+				},
+				onPrevFast: function() {
+					$.imageScroller.fastScrollLeft();
+				},
+				onNextFast: function() {
+					$.imageScroller.fastScrollRight();
+				},
+				enableSlideshow : false,
+				autostartSlideshow : false,
+				slideshowDelay : 3000,
+				onSlideshowPlayed : function() {
+					$('.play').hide();
+					$('.pause').show();	
+				},
+				onSlideshowPaused : function() {
+					$('.play').show();
+					$('.pause').hide();
+				}
+			});
+			
+			$.galleria.loader = $("<div></div>").addClass("loader").append($(new Image()).attr("src","res/loader.gif").attr("title","Loading..."));
+			
+			prepareArrow = function(arrow) {
+				arrow.css({display: "none", opacity: 0.5, "padding-top": "0px"}).fadeIn( 1000);			
+				arrow.hover(
+					function() {
+						arrow.fadeTo("fast", 1);
+					},
+					function() {
+						arrow.fadeTo("fast", 0.5);			
+					}
+				);	
+			}
+			
+			var leftArrow = $("#left_arrow");
+			prepareArrow(leftArrow);
+			leftArrow.click(function() {
+				$.galleria.prev();	
+			});
+			
+			var rightArrow = $("#right_arrow");
+			prepareArrow(rightArrow);
+			rightArrow.click(function() {
+				$.galleria.next();
+			});
+			
+			if (true) {
+				var leftFastArrow = $("#left_fast_arrow");
+				prepareArrow(leftFastArrow);
+				leftFastArrow.click(function() {
+					$.galleria.prevFast();
+				});
+				
+				var rightFastArrow = $("#right_fast_arrow");
+				prepareArrow(rightFastArrow);
+				rightFastArrow.click(function() {
+					$.galleria.nextFast();
+				});
+			}
+		});
+
+		$(document).bind("keydown", "left", function() {
+			if (!KeyboardNavigation.widgetHasFocus()) {
+				$.galleria.prev();
+			}
+		});
+		$(document).bind("keydown", "right", function() {
+			if (!KeyboardNavigation.widgetHasFocus()) {
+				$.galleria.next();
+			}
+		});
+		$(document).bind("keydown", "space", function() {
+			if (!KeyboardNavigation.widgetHasFocus()) {
+				$.galleria.toggleSlideshow();
+			}
+		});
+
+		var KeyboardNavigation = {
+			widgetHasFocus: function() {
+				if(typeof _jaWidgetFocus != 'undefined' && _jaWidgetFocus) {
+					return true;
+				}
+				return false;
+			}
+		}
+	//--><!]]></script>
+
+	</head>
+	<body>
+		<div id="header">
+			<div id="top_container" class="border">
+					
+			</div>
+				
+		</div>
+<div id="main">
+			<div id="middle_container">
+				<div id="main_image"></div>
+				<div id="extras"></div>
+			</div>
+		<div id="scroller_container">
+			<img class="hide" src="res/left-fast.png" id="left_fast_arrow" alt="Scroll left (fast)" title="Scroll left (fast)" />
+			<img class="hide" id="left_arrow" src="res/left.png" alt="Scroll left" title="Scroll left" />					
+			<div id="image_scroller">
+				<ul id="thumbnails_container" class="thumbnails_unstyled">
+						<li class="active">
+							
+							<a href="slides/BahamasScenery/001 Cat Cay Star Palm.jpg" title="">
+								<img src="thumbs/BahamasScenery/001 Cat Cay Star Palm.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/BahamasScenery/002 Highbourne Cay Ocean Beach II.jpg" title="">
+								<img src="thumbs/BahamasScenery/002 Highbourne Cay Ocean Beach II.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:319;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/BahamasScenery/003 Highbourne Cay Ocean Beach III.jpg" title="">
+								<img src="thumbs/BahamasScenery/003 Highbourne Cay Ocean Beach III.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/BahamasScenery/004 Cat Cay Aerial View 2.JPG" title="">
+								<img src="thumbs/BahamasScenery/004 Cat Cay Aerial View 2.JPG" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/BahamasScenery/005 Cat Cay Aerial View 3.jpg" title="">
+								<img src="thumbs/BahamasScenery/005 Cat Cay Aerial View 3.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/BahamasScenery/006 Cat Cay Dock.jpg" title="">
+								<img src="thumbs/BahamasScenery/006 Cat Cay Dock.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/BahamasScenery/007 Cat Cay Aerial View 5.jpg" title="">
+								<img src="thumbs/BahamasScenery/007 Cat Cay Aerial View 5.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/BahamasScenery/008 Cat Cay Sunset.jpg" title="">
+								<img src="thumbs/BahamasScenery/008 Cat Cay Sunset.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:426</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/BahamasScenery/009 Highbourne Cay Ocean Beach.jpg" title="">
+								<img src="thumbs/BahamasScenery/009 Highbourne Cay Ocean Beach.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:319;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/BahamasScenery/010 Highbourne Cay Clouds at Sunset.JPG" title="">
+								<img src="thumbs/BahamasScenery/010 Highbourne Cay Clouds at Sunset.JPG" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/BahamasScenery/011 Highbourne Cay Diagonal Split Sail.jpg" title="">
+								<img src="thumbs/BahamasScenery/011 Highbourne Cay Diagonal Split Sail.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:394</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/BahamasScenery/012 Highbourne Cay Flowers and Sky.jpg" title="">
+								<img src="thumbs/BahamasScenery/012 Highbourne Cay Flowers and Sky.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/BahamasScenery/013 Highbourne Cay Ocean Beach Panorama.jpg" title="">
+								<img src="thumbs/BahamasScenery/013 Highbourne Cay Ocean Beach Panorama.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:125</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/BahamasScenery/014 Highbourne Cay Rock Wall Sunset Panorama.jpg" title="">
+								<img src="thumbs/BahamasScenery/014 Highbourne Cay Rock Wall Sunset Panorama.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:256</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/BahamasScenery/015 Highbourne Cay Fish Pier.jpg" title="">
+								<img src="thumbs/BahamasScenery/015 Highbourne Cay Fish Pier.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:319;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/BahamasScenery/016 Highbourne Cay Rocks.jpg" title="">
+								<img src="thumbs/BahamasScenery/016 Highbourne Cay Rocks.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/BahamasScenery/017 Highbourne Cay Rocks II.jpg" title="">
+								<img src="thumbs/BahamasScenery/017 Highbourne Cay Rocks II.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:319;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/BahamasScenery/018 Highbourne Cay Rocks III.jpg" title="">
+								<img src="thumbs/BahamasScenery/018 Highbourne Cay Rocks III.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:387</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/BahamasScenery/019 Highbourne Cay Rock Wall at Highbourne Cay.jpg" title="">
+								<img src="thumbs/BahamasScenery/019 Highbourne Cay Rock Wall at Highbourne Cay.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:319;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/BahamasScenery/020 Highbourne Cay Rock Wall at Sunset II.JPG" title="">
+								<img src="thumbs/BahamasScenery/020 Highbourne Cay Rock Wall at Sunset II.JPG" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/BahamasScenery/021 Highbourne Cay Sailboat and Stars .JPG" title="">
+								<img src="thumbs/BahamasScenery/021 Highbourne Cay Sailboat and Stars .JPG" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/BahamasScenery/022 Highbourne Cay Sand Patterns.jpg" title="">
+								<img src="thumbs/BahamasScenery/022 Highbourne Cay Sand Patterns.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/BahamasScenery/023 Highbourne Cay Sunset Pier.jpg" title="">
+								<img src="thumbs/BahamasScenery/023 Highbourne Cay Sunset Pier.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/BahamasScenery/024 Highbourne Cay Cloud Formations.jpg" title="">
+								<img src="thumbs/BahamasScenery/024 Highbourne Cay Cloud Formations.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/BahamasScenery/025 Cat Cay Aerial View 1.jpg" title="">
+								<img src="thumbs/BahamasScenery/025 Cat Cay Aerial View 1.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/BahamasScenery/026 Cat Cay Aerial View 4.jpg" title="">
+								<img src="thumbs/BahamasScenery/026 Cat Cay Aerial View 4.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/BahamasScenery/027 Cat Cay Palm at Dusk.jpg" title="">
+								<img src="thumbs/BahamasScenery/027 Cat Cay Palm at Dusk.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:426</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/BahamasScenery/028 Cat Cay Palm Tree.jpg" title="">
+								<img src="thumbs/BahamasScenery/028 Cat Cay Palm Tree.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/BahamasScenery/029 Highbourne Cay Conch Shells.jpg" title="">
+								<img src="thumbs/BahamasScenery/029 Highbourne Cay Conch Shells.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:385</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/BahamasScenery/030 Highbourne Cay Ocean Moon.JPG" title="">
+								<img src="thumbs/BahamasScenery/030 Highbourne Cay Ocean Moon.JPG" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:319;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/BahamasScenery/031 Highbourne Cay Clouds at Dusk.JPG" title="">
+								<img src="thumbs/BahamasScenery/031 Highbourne Cay Clouds at Dusk.JPG" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:319;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/BahamasScenery/032 Highbourne Cay Sailboat at Dusk.JPG" title="">
+								<img src="thumbs/BahamasScenery/032 Highbourne Cay Sailboat at Dusk.JPG" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/BahamasScenery/033 Highbourne Cay Setting Sun II.JPG" title="">
+								<img src="thumbs/BahamasScenery/033 Highbourne Cay Setting Sun II.JPG" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/BahamasScenery/034 Highbourne Cay Stars Panorama.jpg" title="">
+								<img src="thumbs/BahamasScenery/034 Highbourne Cay Stars Panorama.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:376</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/BahamasScenery/035 Highbourne Cay Sun Rays II.JPG" title="">
+								<img src="thumbs/BahamasScenery/035 Highbourne Cay Sun Rays II.JPG" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/BahamasScenery/036 Cat Cay Palm Tree Road.jpg" title="">
+								<img src="thumbs/BahamasScenery/036 Cat Cay Palm Tree Road.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:426</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/BahamasScenery/037 Highbourne Cay Clouds at Dusk Panorama.jpg" title="">
+								<img src="thumbs/BahamasScenery/037 Highbourne Cay Clouds at Dusk Panorama.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:232</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/BahamasScenery/038 Cat Cay Airplane Landing.jpg" title="">
+								<img src="thumbs/BahamasScenery/038 Cat Cay Airplane Landing.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/BahamasScenery/039 Cat Cay Blue Sky Blue Water.jpg" title="">
+								<img src="thumbs/BahamasScenery/039 Cat Cay Blue Sky Blue Water.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/BahamasScenery/040 Cat Cay Dock BW.jpg" title="">
+								<img src="thumbs/BahamasScenery/040 Cat Cay Dock BW.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:319;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/BahamasScenery/041 Cat Cay Palm at Night.jpg" title="">
+								<img src="thumbs/BahamasScenery/041 Cat Cay Palm at Night.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/BahamasScenery/042 Highbourne Cay Star Trails.JPG" title="">
+								<img src="thumbs/BahamasScenery/042 Highbourne Cay Star Trails.JPG" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:319;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/BahamasScenery/043 Cat Cay Palm Wide.jpg" title="">
+								<img src="thumbs/BahamasScenery/043 Cat Cay Palm Wide.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:304</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/BahamasScenery/044 Cat Cay Star Clouds 2.jpg" title="">
+								<img src="thumbs/BahamasScenery/044 Cat Cay Star Clouds 2.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/BahamasScenery/045 Cat Cay Star Clouds.jpg" title="">
+								<img src="thumbs/BahamasScenery/045 Cat Cay Star Clouds.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/BahamasScenery/046 Cat Cay Star Palm 2.jpg" title="">
+								<img src="thumbs/BahamasScenery/046 Cat Cay Star Palm 2.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/BahamasScenery/047 Highbourne Cay Beach.jpg" title="">
+								<img src="thumbs/BahamasScenery/047 Highbourne Cay Beach.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:274;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/BahamasScenery/048 Highbourne Cay Beach II.jpg" title="">
+								<img src="thumbs/BahamasScenery/048 Highbourne Cay Beach II.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:319;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/BahamasScenery/049 Cat Cay StarTrails.jpg" title="">
+								<img src="thumbs/BahamasScenery/049 Cat Cay StarTrails.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/BahamasScenery/050 Highbourne Cay Sun Rays.jpg" title="">
+								<img src="thumbs/BahamasScenery/050 Highbourne Cay Sun Rays.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:429</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/BahamasScenery/051 Highbourne Cay American Flag.jpg" title="">
+								<img src="thumbs/BahamasScenery/051 Highbourne Cay American Flag.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:319;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/BahamasScenery/052 Highbourne Cay Bahamas Blue II.jpg" title="">
+								<img src="thumbs/BahamasScenery/052 Highbourne Cay Bahamas Blue II.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/BahamasScenery/053 Highbourne Cay Bahamas Blue.jpg" title="">
+								<img src="thumbs/BahamasScenery/053 Highbourne Cay Bahamas Blue.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/BahamasScenery/054 Highbourne Cay Bahamas Flag.JPG" title="">
+								<img src="thumbs/BahamasScenery/054 Highbourne Cay Bahamas Flag.JPG" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:319;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/BahamasScenery/055 Highbourne Cay Bahamas Flower Macro.jpg" title="">
+								<img src="thumbs/BahamasScenery/055 Highbourne Cay Bahamas Flower Macro.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:336;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/BahamasScenery/056 Highbourne Cay Bahamas Sail Panorama.jpg" title="">
+								<img src="thumbs/BahamasScenery/056 Highbourne Cay Bahamas Sail Panorama.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:268</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/BahamasScenery/057 Highbourne Cay Conch Shell Portrait.jpg" title="">
+								<img src="thumbs/BahamasScenery/057 Highbourne Cay Conch Shell Portrait.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:319;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/BahamasScenery/058 Highbourne Cay Igauana Eating.jpg" title="">
+								<img src="thumbs/BahamasScenery/058 Highbourne Cay Igauana Eating.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:319;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/BahamasScenery/059 Highbourne Cay Igauna II.jpg" title="">
+								<img src="thumbs/BahamasScenery/059 Highbourne Cay Igauna II.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/BahamasScenery/060 Highbourne Cay Igauna.jpg" title="">
+								<img src="thumbs/BahamasScenery/060 Highbourne Cay Igauna.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/BahamasScenery/061 Highbourne Cay Little Skink II.jpg" title="">
+								<img src="thumbs/BahamasScenery/061 Highbourne Cay Little Skink II.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/BahamasScenery/062 Highbourne Cay Little Skink.jpg" title="">
+								<img src="thumbs/BahamasScenery/062 Highbourne Cay Little Skink.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/BahamasScenery/063 Highbourne Cay Motion from Sail at Dusk.jpg" title="">
+								<img src="thumbs/BahamasScenery/063 Highbourne Cay Motion from Sail at Dusk.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/BahamasScenery/064 Highbourne Cay Proud Palm Tree.JPG" title="">
+								<img src="thumbs/BahamasScenery/064 Highbourne Cay Proud Palm Tree.JPG" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:319;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/BahamasScenery/065 Highbourne Cay Red Macro.JPG" title="">
+								<img src="thumbs/BahamasScenery/065 Highbourne Cay Red Macro.JPG" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/BahamasScenery/066 Highbourne Cay Road to Stars.JPG" title="">
+								<img src="thumbs/BahamasScenery/066 Highbourne Cay Road to Stars.JPG" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:337;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/BahamasScenery/067 Highbourne Cay Rock Wall at Sunset.JPG" title="">
+								<img src="thumbs/BahamasScenery/067 Highbourne Cay Rock Wall at Sunset.JPG" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:319;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/BahamasScenery/068 Highbourne Cay Sailboat and Stars II.JPG" title="">
+								<img src="thumbs/BahamasScenery/068 Highbourne Cay Sailboat and Stars II.JPG" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/BahamasScenery/069 Highbourne Cay Sailboat at Dusk II.JPG" title="">
+								<img src="thumbs/BahamasScenery/069 Highbourne Cay Sailboat at Dusk II.JPG" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/BahamasScenery/070 Highbourne Cay Setting Sun Panorama.jpg" title="">
+								<img src="thumbs/BahamasScenery/070 Highbourne Cay Setting Sun Panorama.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:207;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/BahamasScenery/071 Highbourne Cay Setting Sun.jpg" title="">
+								<img src="thumbs/BahamasScenery/071 Highbourne Cay Setting Sun.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/BahamasScenery/072 Highbourne Cay Soaring Eagle.jpg" title="">
+								<img src="thumbs/BahamasScenery/072 Highbourne Cay Soaring Eagle.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:319;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/BahamasScenery/073 Highbourne Cay Star Trails II.JPG" title="">
+								<img src="thumbs/BahamasScenery/073 Highbourne Cay Star Trails II.JPG" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:319;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/BahamasScenery/074 Highbourne Cay Starry Sky II.JPG" title="">
+								<img src="thumbs/BahamasScenery/074 Highbourne Cay Starry Sky II.JPG" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:319;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/BahamasScenery/075 Highbourne Cay Starry Sky.JPG" title="">
+								<img src="thumbs/BahamasScenery/075 Highbourne Cay Starry Sky.JPG" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/BahamasScenery/076 Highbourne Cay Tree Silhouette at Sunset.JPG" title="">
+								<img src="thumbs/BahamasScenery/076 Highbourne Cay Tree Silhouette at Sunset.JPG" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+				</ul>
+				<div class="clear"></div>
+			</div>					
+			<img class="hide" id="right_arrow" src="res/right.png" alt="Scroll right" title="Scroll right" />
+			<img class="hide" src="res/right-fast.png" id="right_fast_arrow" alt="Scroll right (fast)" title="Scroll right (fast)" />
+			<div class="clear"></div>
+		</div>
+		<div class="clear"></div>
+	<div class="clear"></div>	
+</div>
+<div class="clear"></div>		
+			<script type="text/javascript">
+				_jaWidgetBarColor = "white";
+			</script>
+		
+	<div id="jalbumwidgetcontainer"></div>
+<script type="text/javascript" charset="utf-8"><!--//--><![CDATA[//><!--
+_jaSkin = "Galleria";
+_jaStyle = "Light.css";
+_jaVersion = "10.5";
+_jaGeneratorType = "desktop";
+_jaLanguage = "en";
+_jaPageType = "index";
+_jaRootPath = ".";
+_jaGuid = "1332895002630";
+var script = document.createElement("script");
+script.type = "text/javascript";
+script.src = "http://jalbum.net/widgetapi/load.js";
+document.getElementById("jalbumwidgetcontainer").appendChild(script);
+//--><!]]></script>
+<SCRIPT TYPE="text/javascript"> 
+<!-- 
+//Disable right click script 
+var message="Sorry, right-click has been disabled"; 
+function clickIE() {if (document.all) {(message);return false;}} 
+function clickNS(e) {if 
+(document.layers||(document.getElementById&&!document.all)) { 
+if (e.which==2||e.which==3) {(message);return false;}}} 
+if (document.layers) 
+{document.captureEvents(Event.MOUSEDOWN);document.onmousedown=clickNS;} 
+else{document.onmouseup=clickNS;document.oncontextmenu=clickIE;} 
+document.oncontextmenu=new Function("return false") 
+// --> 
+</SCRIPT>
+</body>
+</html>

@@ -1,0 +1,797 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">	
+	<head>
+		<title>Australia Places2</title>
+		
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="title" content="Australia Places2" />
+<meta name="keywords" content="Australia Places2, Australia Places2, jAlbum 10, Galleria" />
+<meta name="description" content="Australia Places2" />
+<meta property="og:title" content="Australia Places2" />
+<meta property="og:site_name" content="Jalbum" />
+<meta property="fb:app_id" content="140299612674733" />
+		<link href="res/galleria/galleria.css" rel="stylesheet" type="text/css" />
+		<link href="res/index.css" rel="stylesheet" type="text/css" />		
+		<link href="res/common.css" rel="stylesheet" type="text/css" />
+		<style type="text/css">
+	.thumbnails li {
+		width: 40px;
+		height: 40px;
+	}
+
+	#middle_container {
+		height: 510px;
+	}
+
+	#scroller_container {
+		margin-top: 20px;
+		margin-bottom: 10px;
+		width: 892px;	
+	}
+
+	#image_scroller {
+		margin: 0 10px 0 20px;
+		width: 702px;
+	}
+	
+	#thumbnails_container {
+		width: 3152px;
+	}
+	
+	#scroller_container,
+	#image_scroller,
+	#thumbnails_container {
+		height: 52px;
+	}
+	
+	#folders_container {
+		;
+	}		
+	
+	.folders {
+		width: 0px;
+	}
+	
+	.folders li {
+		width: 56px;
+		height: 56px;
+	}
+	
+	.caption,
+	.description {
+		width: 702px;
+	}
+</style>
+		<script src="res/jquery.js" type="text/javascript"></script>
+			<script src="res/jquery.hotkeys.js" type="text/javascript"></script>
+	<script src="res/galleria/jquery.galleria.js" type="text/javascript"></script>
+	<script src="res/jquery.scrollimages.js" type="text/javascript"></script>	
+	<script type="text/javascript"><!--//--><![CDATA[//><!--	
+		$(function() {
+			$("#thumbnails_container").imageScroller({
+				onBeforeScroll: function() { $.galleria.stop() },
+				onScroll: function() { $.galleria.start() }, 
+				duration: 120, 
+				imageWidth: 50, 
+				size: 14,
+				fastSteps: 14
+			});
+			
+			var formattedThumbnailOpacity = 67/100;
+			
+			$(".thumbnails_unstyled").addClass("thumbnails");
+			$("ul.thumbnails").galleria({
+				history: false,
+				clickNext: true,
+				insert: "#main_image",
+				onImage: function(image, caption, thumb) {
+					var extras = $("#extras").css("display", "none").empty();
+					image.css("display", "none").fadeIn(1044);
+					caption.css("display", "none").fadeIn(1044);
+					
+					if (false) {
+						var extrasList = $("<ul></ul>");
+						extrasList.addMetadata("Date", thumb.data("originalDate"));
+						extrasList.addMetadata("Camera", thumb.data("cameraModel"));
+						extrasList.addMetadata("Exposure time", thumb.data("exposureTime"));
+						extrasList.addMetadata("ISO", thumb.data("isoEquivalent"));
+						extrasList.addMetadata("Aperture", thumb.data("aperture"));
+						extrasList.addMetadata("Focus distance", thumb.data("focusDistance"));
+						extrasList.addMetadata("Focal length", thumb.data("focalLength35mm"));
+						extrasList.addMetadata("Keywords", thumb.data("keywords"));
+						if (extrasList.children().length > 0) {
+							extras.append(extrasList);						
+							extrasList.find(":first-child").addClass("first");
+							extras.css({ 
+								width : (image.outerWidth() - (5 * 2) + 100) + "px" 
+							}).fadeIn(1044);
+						}
+					}
+					
+					var li = thumb.parents("li");
+					li.siblings().children("img.selected").fadeTo(500, formattedThumbnailOpacity);
+					thumb.fadeTo("fast", 1).addClass("selected");
+					image.attr("title", "Next image");
+					
+					var original = thumb.data("original");
+					if (original) {
+						var originalLink = $("<a></a>").attr("href", original).text("Download original");
+						caption.append(" (").append(originalLink).append(")");
+					}
+				},
+				onThumb: function(thumb) {
+					var li = thumb.parents("li");
+					var fadeTo = li.is(".active") ? "1" : formattedThumbnailOpacity;
+					thumb.css({display: "none", opacity: fadeTo}).fadeIn(1500);
+					thumb.hover(
+						function() { 
+							thumb.fadeTo("fast", 1);		
+						},
+						function() {
+							li.not(".active").children("img").fadeTo("fast", formattedThumbnailOpacity);
+						}
+					)
+				},
+				preloads: 3,
+				fastSteps: 14,
+				onPrev: function() {
+					$.imageScroller.scrollLeft();
+				},
+				onNext: function() {
+					$.imageScroller.scrollRight();
+				},
+				onPrevFast: function() {
+					$.imageScroller.fastScrollLeft();
+				},
+				onNextFast: function() {
+					$.imageScroller.fastScrollRight();
+				},
+				enableSlideshow : false,
+				autostartSlideshow : false,
+				slideshowDelay : 3000,
+				onSlideshowPlayed : function() {
+					$('.play').hide();
+					$('.pause').show();	
+				},
+				onSlideshowPaused : function() {
+					$('.play').show();
+					$('.pause').hide();
+				}
+			});
+			
+			$.galleria.loader = $("<div></div>").addClass("loader").append($(new Image()).attr("src","res/loader.gif").attr("title","Loading..."));
+			
+			prepareArrow = function(arrow) {
+				arrow.css({display: "none", opacity: 0.5, "padding-top": "0px"}).fadeIn( 1000);			
+				arrow.hover(
+					function() {
+						arrow.fadeTo("fast", 1);
+					},
+					function() {
+						arrow.fadeTo("fast", 0.5);			
+					}
+				);	
+			}
+			
+			var leftArrow = $("#left_arrow");
+			prepareArrow(leftArrow);
+			leftArrow.click(function() {
+				$.galleria.prev();	
+			});
+			
+			var rightArrow = $("#right_arrow");
+			prepareArrow(rightArrow);
+			rightArrow.click(function() {
+				$.galleria.next();
+			});
+			
+			if (true) {
+				var leftFastArrow = $("#left_fast_arrow");
+				prepareArrow(leftFastArrow);
+				leftFastArrow.click(function() {
+					$.galleria.prevFast();
+				});
+				
+				var rightFastArrow = $("#right_fast_arrow");
+				prepareArrow(rightFastArrow);
+				rightFastArrow.click(function() {
+					$.galleria.nextFast();
+				});
+			}
+		});
+
+		$(document).bind("keydown", "left", function() {
+			if (!KeyboardNavigation.widgetHasFocus()) {
+				$.galleria.prev();
+			}
+		});
+		$(document).bind("keydown", "right", function() {
+			if (!KeyboardNavigation.widgetHasFocus()) {
+				$.galleria.next();
+			}
+		});
+		$(document).bind("keydown", "space", function() {
+			if (!KeyboardNavigation.widgetHasFocus()) {
+				$.galleria.toggleSlideshow();
+			}
+		});
+
+		var KeyboardNavigation = {
+			widgetHasFocus: function() {
+				if(typeof _jaWidgetFocus != 'undefined' && _jaWidgetFocus) {
+					return true;
+				}
+				return false;
+			}
+		}
+	//--><!]]></script>
+
+	</head>
+	<body>
+		<div id="header">
+			<div id="top_container" class="border">
+					
+			</div>
+				
+		</div>
+<div id="main">
+			<div id="middle_container">
+				<div id="main_image"></div>
+				<div id="extras"></div>
+			</div>
+		<div id="scroller_container">
+			<img class="hide" src="res/left-fast.png" id="left_fast_arrow" alt="Scroll left (fast)" title="Scroll left (fast)" />
+			<img class="hide" id="left_arrow" src="res/left.png" alt="Scroll left" title="Scroll left" />					
+			<div id="image_scroller">
+				<ul id="thumbnails_container" class="thumbnails_unstyled">
+						<li class="active">
+							
+							<a href="slides/AustraliaPlaces/001 Foul Bay Beach.jpg" title="">
+								<img src="thumbs/AustraliaPlaces/001 Foul Bay Beach.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/AustraliaPlaces/002 Australia Places Cottesloe Building.jpg" title="">
+								<img src="thumbs/AustraliaPlaces/002 Australia Places Cottesloe Building.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/AustraliaPlaces/003 Australia Places Dockhouse Swan River .jpg" title="">
+								<img src="thumbs/AustraliaPlaces/003 Australia Places Dockhouse Swan River .jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:319;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/AustraliaPlaces/004 Australia Places Dunes at Lancelin.jpg" title="">
+								<img src="thumbs/AustraliaPlaces/004 Australia Places Dunes at Lancelin.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/AustraliaPlaces/005 Australia Places Dunes of Lancelin Black and White.jpg" title="">
+								<img src="thumbs/AustraliaPlaces/005 Australia Places Dunes of Lancelin Black and White.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/AustraliaPlaces/006 Australia Places Dock at Blackwood Lake.jpg" title="">
+								<img src="thumbs/AustraliaPlaces/006 Australia Places Dock at Blackwood Lake.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:603;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/AustraliaPlaces/007 Australia Places Helicopter View of the Great Barrier Reef.jpg" title="">
+								<img src="thumbs/AustraliaPlaces/007 Australia Places Helicopter View of the Great Barrier Reef.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/AustraliaPlaces/008 Australia Places Boardwalk at Scarborough.jpg" title="">
+								<img src="thumbs/AustraliaPlaces/008 Australia Places Boardwalk at Scarborough.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/AustraliaPlaces/009 Australia Places Cairns Palm Tree II.jpg" title="">
+								<img src="thumbs/AustraliaPlaces/009 Australia Places Cairns Palm Tree II.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/AustraliaPlaces/010 Australia Places Cottesloe Rock.jpg" title="">
+								<img src="thumbs/AustraliaPlaces/010 Australia Places Cottesloe Rock.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/AustraliaPlaces/011 Australia Places Blackwood Lake.jpg" title="">
+								<img src="thumbs/AustraliaPlaces/011 Australia Places Blackwood Lake.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/AustraliaPlaces/012 Australia Places Blackwood Lake Panorama.jpg" title="">
+								<img src="thumbs/AustraliaPlaces/012 Australia Places Blackwood Lake Panorama.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:236</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/AustraliaPlaces/013 Australia Places Foul Bay Rocks II.jpg" title="">
+								<img src="thumbs/AustraliaPlaces/013 Australia Places Foul Bay Rocks II.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:319;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/AustraliaPlaces/014 Australia Places The Gap - Panorama.jpg" title="">
+								<img src="thumbs/AustraliaPlaces/014 Australia Places The Gap - Panorama.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:337</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/AustraliaPlaces/015 Australia Places View from Augusta Lighthouse.jpg" title="">
+								<img src="thumbs/AustraliaPlaces/015 Australia Places View from Augusta Lighthouse.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:319;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/AustraliaPlaces/016 Australia Places View of Heron Island.jpg" title="">
+								<img src="thumbs/AustraliaPlaces/016 Australia Places View of Heron Island.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:319;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/AustraliaPlaces/017 Australia Places Pink Lake.jpg" title="">
+								<img src="thumbs/AustraliaPlaces/017 Australia Places Pink Lake.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/AustraliaPlaces/018 Australia Places Pinnacles Sunset.jpg" title="">
+								<img src="thumbs/AustraliaPlaces/018 Australia Places Pinnacles Sunset.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/AustraliaPlaces/019 Australia Places Helicopter View of the Great Barrier Reef II.jpg" title="">
+								<img src="thumbs/AustraliaPlaces/019 Australia Places Helicopter View of the Great Barrier Reef II.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/AustraliaPlaces/020 Australia Places Helicopter View of the Great Barrier Reef III.jpg" title="">
+								<img src="thumbs/AustraliaPlaces/020 Australia Places Helicopter View of the Great Barrier Reef III.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/AustraliaPlaces/021 Australia Places Helicopter View of the Great Barrier Reef IV.jpg" title="">
+								<img src="thumbs/AustraliaPlaces/021 Australia Places Helicopter View of the Great Barrier Reef IV.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/AustraliaPlaces/022 Australia Places Heron Island Beach.jpg" title="">
+								<img src="thumbs/AustraliaPlaces/022 Australia Places Heron Island Beach.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:317;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/AustraliaPlaces/023 Australia Places Lighthouse - View 1.jpg" title="">
+								<img src="thumbs/AustraliaPlaces/023 Australia Places Lighthouse - View 1.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/AustraliaPlaces/024 Australia Places Foul Bay Rocks.jpg" title="">
+								<img src="thumbs/AustraliaPlaces/024 Australia Places Foul Bay Rocks.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/AustraliaPlaces/025 Australia Places Yellow Wild Flower Field.jpg" title="">
+								<img src="thumbs/AustraliaPlaces/025 Australia Places Yellow Wild Flower Field.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:431</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/AustraliaPlaces/026 Australia Places Bigurda Trail - Long Exposure.jpg" title="">
+								<img src="thumbs/AustraliaPlaces/026 Australia Places Bigurda Trail - Long Exposure.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:319;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/AustraliaPlaces/027 Australia Places Coconut at Cairns.jpg" title="">
+								<img src="thumbs/AustraliaPlaces/027 Australia Places Coconut at Cairns.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:319;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/AustraliaPlaces/028 Australia Places Coral Bay Beach.JPG" title="">
+								<img src="thumbs/AustraliaPlaces/028 Australia Places Coral Bay Beach.JPG" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/AustraliaPlaces/029 Australia Places Bigurda Trail Cliffs.jpg" title="">
+								<img src="thumbs/AustraliaPlaces/029 Australia Places Bigurda Trail Cliffs.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:319;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/AustraliaPlaces/030 Australia Places Blackwood Lake Clouds.jpg" title="">
+								<img src="thumbs/AustraliaPlaces/030 Australia Places Blackwood Lake Clouds.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:319;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/AustraliaPlaces/031 Australia Places Blackwood Lake Silhouette.JPG" title="">
+								<img src="thumbs/AustraliaPlaces/031 Australia Places Blackwood Lake Silhouette.JPG" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:426</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/AustraliaPlaces/032 Australia Places Dunes at Lancelin Black and White.jpg" title="">
+								<img src="thumbs/AustraliaPlaces/032 Australia Places Dunes at Lancelin Black and White.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:319;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/AustraliaPlaces/033 Australia Places Dunes of Lancelin.jpg" title="">
+								<img src="thumbs/AustraliaPlaces/033 Australia Places Dunes of Lancelin.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/AustraliaPlaces/034 Australia Places Foul Bay Panorama.jpg" title="">
+								<img src="thumbs/AustraliaPlaces/034 Australia Places Foul Bay Panorama.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:254</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/AustraliaPlaces/035 Australia Places University of Western Australia.jpg" title="">
+								<img src="thumbs/AustraliaPlaces/035 Australia Places University of Western Australia.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/AustraliaPlaces/036 Australia Places Cairns Palm Tree.jpg" title="">
+								<img src="thumbs/AustraliaPlaces/036 Australia Places Cairns Palm Tree.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:319;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/AustraliaPlaces/037 Australia Places Cliffs at Albany.jpg" title="">
+								<img src="thumbs/AustraliaPlaces/037 Australia Places Cliffs at Albany.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:319;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/AustraliaPlaces/038 Australia Places Coral Bay Sunrise.JPG" title="">
+								<img src="thumbs/AustraliaPlaces/038 Australia Places Coral Bay Sunrise.JPG" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/AustraliaPlaces/039 Australia Places Cottesloe at Dusk.jpg" title="">
+								<img src="thumbs/AustraliaPlaces/039 Australia Places Cottesloe at Dusk.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/AustraliaPlaces/040 Australia Places Cottesloe Beach Picnic Area.jpg" title="">
+								<img src="thumbs/AustraliaPlaces/040 Australia Places Cottesloe Beach Picnic Area.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:319;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/AustraliaPlaces/041 Australia Places Valley of Giants Vertical Panorama.jpg" title="">
+								<img src="thumbs/AustraliaPlaces/041 Australia Places Valley of Giants Vertical Panorama.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:160;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/AustraliaPlaces/042 Australia Places Waves Crashing at Cairns.jpg" title="">
+								<img src="thumbs/AustraliaPlaces/042 Australia Places Waves Crashing at Cairns.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:266</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/AustraliaPlaces/043 Australia Places Cottesloe Tree Silhouette.jpg" title="">
+								<img src="thumbs/AustraliaPlaces/043 Australia Places Cottesloe Tree Silhouette.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:319;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/AustraliaPlaces/044 Australia Places Dockhouse Swan River Black and White.jpg" title="">
+								<img src="thumbs/AustraliaPlaces/044 Australia Places Dockhouse Swan River Black and White.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:319;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/AustraliaPlaces/045 Australia Places Heron Island Panorama.jpg" title="">
+								<img src="thumbs/AustraliaPlaces/045 Australia Places Heron Island Panorama.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:171</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/AustraliaPlaces/046 Australia Places Lonely Yellow Leaf.jpg" title="">
+								<img src="thumbs/AustraliaPlaces/046 Australia Places Lonely Yellow Leaf.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:413</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/AustraliaPlaces/047 Australia Places Long Exposure Coconut at Cairns.jpg" title="">
+								<img src="thumbs/AustraliaPlaces/047 Australia Places Long Exposure Coconut at Cairns.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:319;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/AustraliaPlaces/048 Australia Places Monkey Mia Beach Point.jpg" title="">
+								<img src="thumbs/AustraliaPlaces/048 Australia Places Monkey Mia Beach Point.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:319;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/AustraliaPlaces/049 Australia Places Monkey Mia Tree Silhouette II.jpg" title="">
+								<img src="thumbs/AustraliaPlaces/049 Australia Places Monkey Mia Tree Silhouette II.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:319;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/AustraliaPlaces/050 Australia Places Monkey Mia Tree Silhouette.jpg" title="">
+								<img src="thumbs/AustraliaPlaces/050 Australia Places Monkey Mia Tree Silhouette.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/AustraliaPlaces/051 Australia Places Morning Moon at Monkey Mia.jpg" title="">
+								<img src="thumbs/AustraliaPlaces/051 Australia Places Morning Moon at Monkey Mia.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:429;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/AustraliaPlaces/052 Australia Places Pinnacles Desert.jpg" title="">
+								<img src="thumbs/AustraliaPlaces/052 Australia Places Pinnacles Desert.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:355;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/AustraliaPlaces/053 Australia Places Sunset Collage.jpg" title="">
+								<img src="thumbs/AustraliaPlaces/053 Australia Places Sunset Collage.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:215</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/AustraliaPlaces/054 Australia Places Surfers' Point Panorama.jpg" title="">
+								<img src="thumbs/AustraliaPlaces/054 Australia Places Surfers' Point Panorama.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:169</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/AustraliaPlaces/055 Australia Places The Island - Bigurda Trail.jpg" title="">
+								<img src="thumbs/AustraliaPlaces/055 Australia Places The Island - Bigurda Trail.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:319;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/AustraliaPlaces/056 Australia Places The Natural Bridge Panorama.jpg" title="">
+								<img src="thumbs/AustraliaPlaces/056 Australia Places The Natural Bridge Panorama.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:226</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/AustraliaPlaces/057 Australia Places The Pinnacles .jpg" title="">
+								<img src="thumbs/AustraliaPlaces/057 Australia Places The Pinnacles .jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:319;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/AustraliaPlaces/058 Australia Places Wreck at Heron Island.jpg" title="">
+								<img src="thumbs/AustraliaPlaces/058 Australia Places Wreck at Heron Island.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/AustraliaPlaces/059 Australia Places Cable Beach Lighthouse.jpg" title="">
+								<img src="thumbs/AustraliaPlaces/059 Australia Places Cable Beach Lighthouse.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:323</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/AustraliaPlaces/060 Australia Places Setting Sun at Cottesloe.JPG" title="">
+								<img src="thumbs/AustraliaPlaces/060 Australia Places Setting Sun at Cottesloe.JPG" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/AustraliaPlaces/061 Australia Places Sunrise at Coral Bay.JPG" title="">
+								<img src="thumbs/AustraliaPlaces/061 Australia Places Sunrise at Coral Bay.JPG" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/AustraliaPlaces/062 Australia Places Sunset at Cottelsoe.jpg" title="">
+								<img src="thumbs/AustraliaPlaces/062 Australia Places Sunset at Cottelsoe.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:319;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/AustraliaPlaces/063 Australia Places Sunset at Cottesloe Panorama .jpg" title="">
+								<img src="thumbs/AustraliaPlaces/063 Australia Places Sunset at Cottesloe Panorama .jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:217</span>
+						</li>
+						
+				</ul>
+				<div class="clear"></div>
+			</div>					
+			<img class="hide" id="right_arrow" src="res/right.png" alt="Scroll right" title="Scroll right" />
+			<img class="hide" src="res/right-fast.png" id="right_fast_arrow" alt="Scroll right (fast)" title="Scroll right (fast)" />
+			<div class="clear"></div>
+		</div>
+		<div class="clear"></div>
+	<div class="clear"></div>	
+</div>
+<div class="clear"></div>		
+			<script type="text/javascript">
+				_jaWidgetBarColor = "white";
+			</script>
+		
+	<div id="jalbumwidgetcontainer"></div>
+<script type="text/javascript" charset="utf-8"><!--//--><![CDATA[//><!--
+_jaSkin = "Galleria";
+_jaStyle = "Light.css";
+_jaVersion = "10.5";
+_jaGeneratorType = "desktop";
+_jaLanguage = "en";
+_jaPageType = "index";
+_jaRootPath = ".";
+_jaGuid = "1332895002630";
+var script = document.createElement("script");
+script.type = "text/javascript";
+script.src = "http://jalbum.net/widgetapi/load.js";
+document.getElementById("jalbumwidgetcontainer").appendChild(script);
+//--><!]]></script>
+<SCRIPT TYPE="text/javascript"> 
+<!-- 
+//Disable right click script 
+var message="Sorry, right-click has been disabled"; 
+function clickIE() {if (document.all) {(message);return false;}} 
+function clickNS(e) {if 
+(document.layers||(document.getElementById&&!document.all)) { 
+if (e.which==2||e.which==3) {(message);return false;}}} 
+if (document.layers) 
+{document.captureEvents(Event.MOUSEDOWN);document.onmousedown=clickNS;} 
+else{document.onmouseup=clickNS;document.oncontextmenu=clickIE;} 
+document.oncontextmenu=new Function("return false") 
+});
+// --> 
+</SCRIPT>
+</body>
+</html>

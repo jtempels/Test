@@ -1,0 +1,517 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">	
+	<head>
+		<title>California</title>
+				
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="title" content="California" />
+<meta name="keywords" content="California, California, jAlbum 10, Galleria" />
+<meta name="description" content="California" />
+<meta property="og:title" content="California" />
+<meta property="og:site_name" content="Jalbum" />
+<meta property="fb:app_id" content="140299612674733" />
+		<link href="res/galleria/galleria.css" rel="stylesheet" type="text/css" />
+		<link href="res/index.css" rel="stylesheet" type="text/css" />		
+		<link href="res/common.css" rel="stylesheet" type="text/css" />
+		<style type="text/css">
+	.thumbnails li {
+		width: 40px;
+		height: 40px;
+	}
+
+	#middle_container {
+		height: 510px;
+	}
+
+	#scroller_container {
+		margin-top: 20px;
+		margin-bottom: 10px;
+		width: 892px;	
+	}
+
+	#image_scroller {
+		margin: 0 10px 0 20px;
+		width: 702px;
+	}
+	
+	#thumbnails_container {
+		width: 1402px;
+	}
+	
+	#scroller_container,
+	#image_scroller,
+	#thumbnails_container {
+		height: 52px;
+	}
+	
+	#folders_container {
+		;
+	}		
+	
+	.folders {
+		width: 0px;
+	}
+	
+	.folders li {
+		width: 56px;
+		height: 56px;
+	}
+	
+	.caption,
+	.description {
+		width: 702px;
+	}
+</style>
+		<script src="res/jquery.js" type="text/javascript"></script>
+			<script src="res/jquery.hotkeys.js" type="text/javascript"></script>
+	<script src="res/galleria/jquery.galleria.js" type="text/javascript"></script>
+	<script src="res/jquery.scrollimages.js" type="text/javascript"></script>	
+	<script type="text/javascript"><!--//--><![CDATA[//><!--	
+		$(function() {
+			$("#thumbnails_container").imageScroller({
+				onBeforeScroll: function() { $.galleria.stop() },
+				onScroll: function() { $.galleria.start() }, 
+				duration: 120, 
+				imageWidth: 50, 
+				size: 14,
+				fastSteps: 14
+			});
+			
+			var formattedThumbnailOpacity = 67/100;
+			
+			$(".thumbnails_unstyled").addClass("thumbnails");
+			$("ul.thumbnails").galleria({
+				history: false,
+				clickNext: true,
+				insert: "#main_image",
+				onImage: function(image, caption, thumb) {
+					var extras = $("#extras").css("display", "none").empty();
+					image.css("display", "none").fadeIn(1063);
+					caption.css("display", "none").fadeIn(1063);
+					
+					if (false) {
+						var extrasList = $("<ul></ul>");
+						extrasList.addMetadata("Date", thumb.data("originalDate"));
+						extrasList.addMetadata("Camera", thumb.data("cameraModel"));
+						extrasList.addMetadata("Exposure time", thumb.data("exposureTime"));
+						extrasList.addMetadata("ISO", thumb.data("isoEquivalent"));
+						extrasList.addMetadata("Aperture", thumb.data("aperture"));
+						extrasList.addMetadata("Focus distance", thumb.data("focusDistance"));
+						extrasList.addMetadata("Focal length", thumb.data("focalLength35mm"));
+						extrasList.addMetadata("Keywords", thumb.data("keywords"));
+						if (extrasList.children().length > 0) {
+							extras.append(extrasList);						
+							extrasList.find(":first-child").addClass("first");
+							extras.css({ 
+								width : (image.outerWidth() - (5 * 2) + 100) + "px" 
+							}).fadeIn(1063);
+						}
+					}
+					
+					var li = thumb.parents("li");
+					li.siblings().children("img.selected").fadeTo(500, formattedThumbnailOpacity);
+					thumb.fadeTo("fast", 1).addClass("selected");
+					image.attr("title", "Next image");
+					
+					var original = thumb.data("original");
+					if (original) {
+						var originalLink = $("<a></a>").attr("href", original).text("Download original");
+						caption.append(" (").append(originalLink).append(")");
+					}
+				},
+				onThumb: function(thumb) {
+					var li = thumb.parents("li");
+					var fadeTo = li.is(".active") ? "1" : formattedThumbnailOpacity;
+					thumb.css({display: "none", opacity: fadeTo}).fadeIn(1500);
+					thumb.hover(
+						function() { 
+							thumb.fadeTo("fast", 1);		
+						},
+						function() {
+							li.not(".active").children("img").fadeTo("fast", formattedThumbnailOpacity);
+						}
+					)
+				},
+				preloads: 3,
+				fastSteps: 14,
+				onPrev: function() {
+					$.imageScroller.scrollLeft();
+				},
+				onNext: function() {
+					$.imageScroller.scrollRight();
+				},
+				onPrevFast: function() {
+					$.imageScroller.fastScrollLeft();
+				},
+				onNextFast: function() {
+					$.imageScroller.fastScrollRight();
+				},
+				enableSlideshow : false,
+				autostartSlideshow : false,
+				slideshowDelay : 3000,
+				onSlideshowPlayed : function() {
+					$('.play').hide();
+					$('.pause').show();	
+				},
+				onSlideshowPaused : function() {
+					$('.play').show();
+					$('.pause').hide();
+				}
+			});
+			
+			$.galleria.loader = $("<div></div>").addClass("loader").append($(new Image()).attr("src","res/loader.gif").attr("title","Loading..."));
+			
+			prepareArrow = function(arrow) {
+				arrow.css({display: "none", opacity: 0.5, "padding-top": "0px"}).fadeIn( 1000);			
+				arrow.hover(
+					function() {
+						arrow.fadeTo("fast", 1);
+					},
+					function() {
+						arrow.fadeTo("fast", 0.5);			
+					}
+				);	
+			}
+			
+			var leftArrow = $("#left_arrow");
+			prepareArrow(leftArrow);
+			leftArrow.click(function() {
+				$.galleria.prev();	
+			});
+			
+			var rightArrow = $("#right_arrow");
+			prepareArrow(rightArrow);
+			rightArrow.click(function() {
+				$.galleria.next();
+			});
+			
+			if (true) {
+				var leftFastArrow = $("#left_fast_arrow");
+				prepareArrow(leftFastArrow);
+				leftFastArrow.click(function() {
+					$.galleria.prevFast();
+				});
+				
+				var rightFastArrow = $("#right_fast_arrow");
+				prepareArrow(rightFastArrow);
+				rightFastArrow.click(function() {
+					$.galleria.nextFast();
+				});
+			}
+		});
+
+		$(document).bind("keydown", "left", function() {
+			if (!KeyboardNavigation.widgetHasFocus()) {
+				$.galleria.prev();
+			}
+		});
+		$(document).bind("keydown", "right", function() {
+			if (!KeyboardNavigation.widgetHasFocus()) {
+				$.galleria.next();
+			}
+		});
+		$(document).bind("keydown", "space", function() {
+			if (!KeyboardNavigation.widgetHasFocus()) {
+				$.galleria.toggleSlideshow();
+			}
+		});
+
+		var KeyboardNavigation = {
+			widgetHasFocus: function() {
+				if(typeof _jaWidgetFocus != 'undefined' && _jaWidgetFocus) {
+					return true;
+				}
+				return false;
+			}
+		}
+	//--><!]]></script>
+
+	</head>
+	<body>
+		<div id="header">
+			<div id="top_container" class="border">
+					
+			</div>
+				
+		</div>
+<div id="main">
+			<div id="middle_container">
+				<div id="main_image"></div>
+				<div id="extras"></div>
+			</div>
+		<div id="scroller_container">
+			<img class="hide" src="res/left-fast.png" id="left_fast_arrow" alt="Scroll left (fast)" title="Scroll left (fast)" />
+			<img class="hide" id="left_arrow" src="res/left.png" alt="Scroll left" title="Scroll left" />					
+			<div id="image_scroller">
+				<ul id="thumbnails_container" class="thumbnails_unstyled">
+						<li class="active">
+							
+							<a href="slides/California/001 San Francisco Bay Bridge 2.jpg" title="">
+								<img src="thumbs/California/001 San Francisco Bay Bridge 2.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:363</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/California/002 San Francisco Alcatraz Island.jpg" title="">
+								<img src="thumbs/California/002 San Francisco Alcatraz Island.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/California/003 San Francisco  Dock BW.jpg" title="">
+								<img src="thumbs/California/003 San Francisco  Dock BW.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:319;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/California/004 San Francisco  Street Art.jpg" title="">
+								<img src="thumbs/California/004 San Francisco  Street Art.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/California/005 San Francisco Gay Pride Parade 2.jpg" title="">
+								<img src="thumbs/California/005 San Francisco Gay Pride Parade 2.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:411;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/California/006 San Francisco Golden Gate.jpg" title="">
+								<img src="thumbs/California/006 San Francisco Golden Gate.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/California/007 San Francisco Ghiradelli.jpg" title="">
+								<img src="thumbs/California/007 San Francisco Ghiradelli.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/California/008 San Francisco Golden Gate Fog 2.jpg" title="">
+								<img src="thumbs/California/008 San Francisco Golden Gate Fog 2.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:426</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/California/009 San Francisco Golden Gate Fog 3.jpg" title="">
+								<img src="thumbs/California/009 San Francisco Golden Gate Fog 3.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:426</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/California/010 San Francisco Baby Seal.jpg" title="">
+								<img src="thumbs/California/010 San Francisco Baby Seal.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:489;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/California/011 San Francisco Golden Gate Fog.jpg" title="">
+								<img src="thumbs/California/011 San Francisco Golden Gate Fog.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/California/012 San Francisco Street Flowers.jpg" title="">
+								<img src="thumbs/California/012 San Francisco Street Flowers.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/California/013 San Francisco Marble Steps.jpg" title="">
+								<img src="thumbs/California/013 San Francisco Marble Steps.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/California/014 San Francisco Hills.jpg" title="">
+								<img src="thumbs/California/014 San Francisco Hills.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:319;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/California/015 San Francisco Pilings BW.jpg" title="">
+								<img src="thumbs/California/015 San Francisco Pilings BW.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:319;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/California/016 Santa Cruz Boardwalk.jpg" title="">
+								<img src="thumbs/California/016 Santa Cruz Boardwalk.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/California/017 San Francisco Gay Pride Parade Pink Lady Man.jpg" title="">
+								<img src="thumbs/California/017 San Francisco Gay Pride Parade Pink Lady Man.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:596;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/California/018 San Francisco Fishermans Wharf 2.jpg" title="">
+								<img src="thumbs/California/018 San Francisco Fishermans Wharf 2.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:319;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/California/019 San Francisco Gay Pride Parade.jpg" title="">
+								<img src="thumbs/California/019 San Francisco Gay Pride Parade.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/California/020 San Francisco Bay Bridge Pano BW.jpg" title="">
+								<img src="thumbs/California/020 San Francisco Bay Bridge Pano BW.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:623;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/California/021 San Francisco Chain BW.jpg" title="">
+								<img src="thumbs/California/021 San Francisco Chain BW.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:319;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/California/022 San Francisco Fishermans Wharf.jpg" title="">
+								<img src="thumbs/California/022 San Francisco Fishermans Wharf.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:319;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/California/023 San Francisco Gay Pride Parade Eyes.jpg" title="">
+								<img src="thumbs/California/023 San Francisco Gay Pride Parade Eyes.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:460</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/California/024 San Francisco Gay Pride Parade 4.jpg" title="">
+								<img src="thumbs/California/024 San Francisco Gay Pride Parade 4.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:343</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/California/025 Santa Cruz Drive Panorama.JPG" title="">
+								<img src="thumbs/California/025 Santa Cruz Drive Panorama.JPG" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:184</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/California/026 San Francisco Gay Pride Parade 3.jpg" title="">
+								<img src="thumbs/California/026 San Francisco Gay Pride Parade 3.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:306;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/California/027 San Francisco Chain.jpg" title="">
+								<img src="thumbs/California/027 San Francisco Chain.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:319;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/California/028 San Francisco Gay Pride Parade 5.jpg" title="">
+								<img src="thumbs/California/028 San Francisco Gay Pride Parade 5.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:483;;height:480</span>
+						</li>
+						
+				</ul>
+				<div class="clear"></div>
+			</div>					
+			<img class="hide" id="right_arrow" src="res/right.png" alt="Scroll right" title="Scroll right" />
+			<img class="hide" src="res/right-fast.png" id="right_fast_arrow" alt="Scroll right (fast)" title="Scroll right (fast)" />
+			<div class="clear"></div>
+		</div>
+		<div class="clear"></div>
+	<div class="clear"></div>	
+</div>
+<div class="clear"></div>
+		
+			<script type="text/javascript">
+				_jaWidgetBarColor = "white";
+			</script>
+		
+	<div id="jalbumwidgetcontainer"></div>
+<script type="text/javascript" charset="utf-8"><!--//--><![CDATA[//><!--
+_jaSkin = "Galleria";
+_jaStyle = "Light.css";
+_jaVersion = "10.5";
+_jaGeneratorType = "desktop";
+_jaLanguage = "en";
+_jaPageType = "index";
+_jaRootPath = ".";
+_jaGuid = "1332895002630";
+var script = document.createElement("script");
+script.type = "text/javascript";
+script.src = "http://jalbum.net/widgetapi/load.js";
+document.getElementById("jalbumwidgetcontainer").appendChild(script);
+//--><!]]></script>
+<SCRIPT TYPE="text/javascript"> 
+<!-- 
+//Disable right click script 
+var message="Sorry, right-click has been disabled"; 
+function clickIE() {if (document.all) {(message);return false;}} 
+function clickNS(e) {if 
+(document.layers||(document.getElementById&&!document.all)) { 
+if (e.which==2||e.which==3) {(message);return false;}}} 
+if (document.layers) 
+{document.captureEvents(Event.MOUSEDOWN);document.onmousedown=clickNS;} 
+else{document.onmouseup=clickNS;document.oncontextmenu=clickIE;} 
+document.oncontextmenu=new Function("return false") 
+// --> 
+</SCRIPT>
+</body>
+</html>

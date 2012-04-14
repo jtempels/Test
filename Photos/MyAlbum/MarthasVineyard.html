@@ -1,0 +1,598 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">	
+	<head>
+
+		<title>Martha's Vineyard</title>
+				
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="title" content="Martha's Vineyard" />
+<meta name="keywords" content="Martha's Vineyard, Martha's Vineyard, jAlbum 10, Galleria" />
+<meta name="description" content="Martha's Vineyard" />
+<meta property="og:title" content="Martha's Vineyard" />
+<meta property="og:site_name" content="Jalbum" />
+<meta property="fb:app_id" content="140299612674733" />
+		<link href="res/galleria/galleria.css" rel="stylesheet" type="text/css" />
+		<link href="res/index.css" rel="stylesheet" type="text/css" />		
+		<link href="res/common.css" rel="stylesheet" type="text/css" />
+		<style type="text/css">
+	.thumbnails li {
+		width: 40px;
+		height: 40px;
+	}
+
+	#middle_container {
+		height: 510px;
+	}
+
+	#scroller_container {
+		margin-top: 20px;
+		margin-bottom: 10px;
+		width: 892px;	
+	}
+
+	#image_scroller {
+		margin: 0 10px 0 20px;
+		width: 702px;
+	}
+	
+	#thumbnails_container {
+		width: 1902px;
+	}
+	
+	#scroller_container,
+	#image_scroller,
+	#thumbnails_container {
+		height: 52px;
+	}
+	
+	#folders_container {
+		;
+	}		
+	
+	.folders {
+		width: 0px;
+	}
+	
+	.folders li {
+		width: 56px;
+		height: 56px;
+	}
+	
+	.caption,
+	.description {
+		width: 702px;
+	}
+</style>
+		<script src="res/jquery.js" type="text/javascript"></script>
+			<script src="res/jquery.hotkeys.js" type="text/javascript"></script>
+	<script src="res/galleria/jquery.galleria.js" type="text/javascript"></script>
+	<script src="res/jquery.scrollimages.js" type="text/javascript"></script>	
+	<script type="text/javascript"><!--//--><![CDATA[//><!--	
+		$(function() {
+			$("#thumbnails_container").imageScroller({
+				onBeforeScroll: function() { $.galleria.stop() },
+				onScroll: function() { $.galleria.start() }, 
+				duration: 120, 
+				imageWidth: 50, 
+				size: 14,
+				fastSteps: 14
+			});
+			
+			var formattedThumbnailOpacity = 67/100;
+			
+			$(".thumbnails_unstyled").addClass("thumbnails");
+			$("ul.thumbnails").galleria({
+				history: false,
+				clickNext: true,
+				insert: "#main_image",
+				onImage: function(image, caption, thumb) {
+					var extras = $("#extras").css("display", "none").empty();
+					image.css("display", "none").fadeIn(1006);
+					caption.css("display", "none").fadeIn(1006);
+					
+					if (false) {
+						var extrasList = $("<ul></ul>");
+						extrasList.addMetadata("Date", thumb.data("originalDate"));
+						extrasList.addMetadata("Camera", thumb.data("cameraModel"));
+						extrasList.addMetadata("Exposure time", thumb.data("exposureTime"));
+						extrasList.addMetadata("ISO", thumb.data("isoEquivalent"));
+						extrasList.addMetadata("Aperture", thumb.data("aperture"));
+						extrasList.addMetadata("Focus distance", thumb.data("focusDistance"));
+						extrasList.addMetadata("Focal length", thumb.data("focalLength35mm"));
+						extrasList.addMetadata("Keywords", thumb.data("keywords"));
+						if (extrasList.children().length > 0) {
+							extras.append(extrasList);						
+							extrasList.find(":first-child").addClass("first");
+							extras.css({ 
+								width : (image.outerWidth() - (5 * 2) + 100) + "px" 
+							}).fadeIn(1006);
+						}
+					}
+					
+					var li = thumb.parents("li");
+					li.siblings().children("img.selected").fadeTo(500, formattedThumbnailOpacity);
+					thumb.fadeTo("fast", 1).addClass("selected");
+					image.attr("title", "Next image");
+					
+					var original = thumb.data("original");
+					if (original) {
+						var originalLink = $("<a></a>").attr("href", original).text("Download original");
+						caption.append(" (").append(originalLink).append(")");
+					}
+				},
+				onThumb: function(thumb) {
+					var li = thumb.parents("li");
+					var fadeTo = li.is(".active") ? "1" : formattedThumbnailOpacity;
+					thumb.css({display: "none", opacity: fadeTo}).fadeIn(1500);
+					thumb.hover(
+						function() { 
+							thumb.fadeTo("fast", 1);		
+						},
+						function() {
+							li.not(".active").children("img").fadeTo("fast", formattedThumbnailOpacity);
+						}
+					)
+				},
+				preloads: 3,
+				fastSteps: 14,
+				onPrev: function() {
+					$.imageScroller.scrollLeft();
+				},
+				onNext: function() {
+					$.imageScroller.scrollRight();
+				},
+				onPrevFast: function() {
+					$.imageScroller.fastScrollLeft();
+				},
+				onNextFast: function() {
+					$.imageScroller.fastScrollRight();
+				},
+				enableSlideshow : false,
+				autostartSlideshow : false,
+				slideshowDelay : 3000,
+				onSlideshowPlayed : function() {
+					$('.play').hide();
+					$('.pause').show();	
+				},
+				onSlideshowPaused : function() {
+					$('.play').show();
+					$('.pause').hide();
+				}
+			});
+			
+			$.galleria.loader = $("<div></div>").addClass("loader").append($(new Image()).attr("src","res/loader.gif").attr("title","Loading..."));
+			
+			prepareArrow = function(arrow) {
+				arrow.css({display: "none", opacity: 0.5, "padding-top": "0px"}).fadeIn( 1000);			
+				arrow.hover(
+					function() {
+						arrow.fadeTo("fast", 1);
+					},
+					function() {
+						arrow.fadeTo("fast", 0.5);			
+					}
+				);	
+			}
+			
+			var leftArrow = $("#left_arrow");
+			prepareArrow(leftArrow);
+			leftArrow.click(function() {
+				$.galleria.prev();	
+			});
+			
+			var rightArrow = $("#right_arrow");
+			prepareArrow(rightArrow);
+			rightArrow.click(function() {
+				$.galleria.next();
+			});
+			
+			if (true) {
+				var leftFastArrow = $("#left_fast_arrow");
+				prepareArrow(leftFastArrow);
+				leftFastArrow.click(function() {
+					$.galleria.prevFast();
+				});
+				
+				var rightFastArrow = $("#right_fast_arrow");
+				prepareArrow(rightFastArrow);
+				rightFastArrow.click(function() {
+					$.galleria.nextFast();
+				});
+			}
+		});
+
+		$(document).bind("keydown", "left", function() {
+			if (!KeyboardNavigation.widgetHasFocus()) {
+				$.galleria.prev();
+			}
+		});
+		$(document).bind("keydown", "right", function() {
+			if (!KeyboardNavigation.widgetHasFocus()) {
+				$.galleria.next();
+			}
+		});
+		$(document).bind("keydown", "space", function() {
+			if (!KeyboardNavigation.widgetHasFocus()) {
+				$.galleria.toggleSlideshow();
+			}
+		});
+
+		var KeyboardNavigation = {
+			widgetHasFocus: function() {
+				if(typeof _jaWidgetFocus != 'undefined' && _jaWidgetFocus) {
+					return true;
+				}
+				return false;
+			}
+		}
+	//--><!]]></script>
+
+	</head>
+	<body>
+		<div id="header">
+			<div id="top_container" class="border">
+					
+			</div>
+				
+		</div>
+<div id="main">
+			<div id="middle_container">
+				<div id="main_image"></div>
+				<div id="extras"></div>
+			</div>
+		<div id="scroller_container">
+			<img class="hide" src="res/left-fast.png" id="left_fast_arrow" alt="Scroll left (fast)" title="Scroll left (fast)" />
+			<img class="hide" id="left_arrow" src="res/left.png" alt="Scroll left" title="Scroll left" />					
+			<div id="image_scroller">
+				<ul id="thumbnails_container" class="thumbnails_unstyled">
+						<li class="active">
+							
+							<a href="slides/MarthasVineyard/001 Marthas Vineyard SweetStars.JPG" title="">
+								<img src="thumbs/MarthasVineyard/001 Marthas Vineyard SweetStars.JPG" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/MarthasVineyard/002 Marthas Vineyard Starfish on Deck.jpg" title="">
+								<img src="thumbs/MarthasVineyard/002 Marthas Vineyard Starfish on Deck.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:319;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/MarthasVineyard/003 Marthas Vineyard Sunny Beach.jpg" title="">
+								<img src="thumbs/MarthasVineyard/003 Marthas Vineyard Sunny Beach.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/MarthasVineyard/004 Marthas Vineyard Beach View.jpg" title="">
+								<img src="thumbs/MarthasVineyard/004 Marthas Vineyard Beach View.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:319;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/MarthasVineyard/005 Marthas Vineyard Beach.jpg" title="">
+								<img src="thumbs/MarthasVineyard/005 Marthas Vineyard Beach.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/MarthasVineyard/006 Marthas Vineyard Beach Path at Sunset.jpg" title="">
+								<img src="thumbs/MarthasVineyard/006 Marthas Vineyard Beach Path at Sunset.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:426</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/MarthasVineyard/007 Marthas Vineyard Green Dunes.jpg" title="">
+								<img src="thumbs/MarthasVineyard/007 Marthas Vineyard Green Dunes.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/MarthasVineyard/008 Marthas Vineyard Sunny Day.JPG" title="">
+								<img src="thumbs/MarthasVineyard/008 Marthas Vineyard Sunny Day.JPG" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/MarthasVineyard/009 Marthas Vineyard Cloud Formations.jpg" title="">
+								<img src="thumbs/MarthasVineyard/009 Marthas Vineyard Cloud Formations.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:294</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/MarthasVineyard/010 Marthas Vineyard Foggy Beach 3.jpg" title="">
+								<img src="thumbs/MarthasVineyard/010 Marthas Vineyard Foggy Beach 3.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/MarthasVineyard/011 Marthas Vineyard Foggy Day.jpg" title="">
+								<img src="thumbs/MarthasVineyard/011 Marthas Vineyard Foggy Day.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/MarthasVineyard/012 Marthas Vineyard Foggy Beach 1.jpg" title="">
+								<img src="thumbs/MarthasVineyard/012 Marthas Vineyard Foggy Beach 1.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/MarthasVineyard/013 Marthas Vineyard Moody Clouds.jpg" title="">
+								<img src="thumbs/MarthasVineyard/013 Marthas Vineyard Moody Clouds.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/MarthasVineyard/014 Marthas Vineyard Scattered Sailboats.jpg" title="">
+								<img src="thumbs/MarthasVineyard/014 Marthas Vineyard Scattered Sailboats.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/MarthasVineyard/015 Marthas Vineyard Starfish Portrait.jpg" title="">
+								<img src="thumbs/MarthasVineyard/015 Marthas Vineyard Starfish Portrait.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/MarthasVineyard/016 Marthas Vineyard Sunrise.jpg" title="">
+								<img src="thumbs/MarthasVineyard/016 Marthas Vineyard Sunrise.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/MarthasVineyard/017 Martha's Vineyard Clouds and Flowers.jpg" title="">
+								<img src="thumbs/MarthasVineyard/017 Martha's Vineyard Clouds and Flowers.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/MarthasVineyard/018 Marthas Vineyard Sunset.JPG" title="">
+								<img src="thumbs/MarthasVineyard/018 Marthas Vineyard Sunset.JPG" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/MarthasVineyard/019 Martha's Vineyard Path Panormaa.jpg" title="">
+								<img src="thumbs/MarthasVineyard/019 Martha's Vineyard Path Panormaa.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:262</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/MarthasVineyard/020 Martha's Vineyard Beach Path.jpg" title="">
+								<img src="thumbs/MarthasVineyard/020 Martha's Vineyard Beach Path.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/MarthasVineyard/021 Marthas Vineyard Aerial View 2.jpg" title="">
+								<img src="thumbs/MarthasVineyard/021 Marthas Vineyard Aerial View 2.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/MarthasVineyard/022 Marthas Vineyard Aerial View.JPG" title="">
+								<img src="thumbs/MarthasVineyard/022 Marthas Vineyard Aerial View.JPG" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:319;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/MarthasVineyard/023 Marthas Vineyard Beach Path.jpg" title="">
+								<img src="thumbs/MarthasVineyard/023 Marthas Vineyard Beach Path.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:319;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/MarthasVineyard/024 Martha's Vineyard Clouds and Flowers Vertical.jpg" title="">
+								<img src="thumbs/MarthasVineyard/024 Martha's Vineyard Clouds and Flowers Vertical.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:339;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/MarthasVineyard/025 Marthas Vineyard Aerial View 3.jpg" title="">
+								<img src="thumbs/MarthasVineyard/025 Marthas Vineyard Aerial View 3.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/MarthasVineyard/026 Marthas Vineyard Field of Flowers Panorama.jpg" title="">
+								<img src="thumbs/MarthasVineyard/026 Marthas Vineyard Field of Flowers Panorama.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:322</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/MarthasVineyard/027 Marthas Vineyard Foggy Beach 2.jpg" title="">
+								<img src="thumbs/MarthasVineyard/027 Marthas Vineyard Foggy Beach 2.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/MarthasVineyard/028 Marthas Vineyard Happy Seal.jpg" title="">
+								<img src="thumbs/MarthasVineyard/028 Marthas Vineyard Happy Seal.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/MarthasVineyard/029 Marthas Vineyard Path at Sundown.jpg" title="">
+								<img src="thumbs/MarthasVineyard/029 Marthas Vineyard Path at Sundown.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:319;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/MarthasVineyard/030 Marthas Vineyard Red Sunset.jpg" title="">
+								<img src="thumbs/MarthasVineyard/030 Marthas Vineyard Red Sunset.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:319;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/MarthasVineyard/031 Marthas Vineyard Sailboats.jpg" title="">
+								<img src="thumbs/MarthasVineyard/031 Marthas Vineyard Sailboats.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:319;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/MarthasVineyard/032 Marthas Vineyard Sunset III.jpg" title="">
+								<img src="thumbs/MarthasVineyard/032 Marthas Vineyard Sunset III.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:319;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/MarthasVineyard/033 Marthas Vineyard Sunset at Sea II.jpg" title="">
+								<img src="thumbs/MarthasVineyard/033 Marthas Vineyard Sunset at Sea II.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/MarthasVineyard/034 Marthas Vineyard Sunset at Sea.jpg" title="">
+								<img src="thumbs/MarthasVineyard/034 Marthas Vineyard Sunset at Sea.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/MarthasVineyard/035 Marthas Vineyard Sunset Panorama .jpg" title="">
+								<img src="thumbs/MarthasVineyard/035 Marthas Vineyard Sunset Panorama .jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:134</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/MarthasVineyard/036 Marthas Vineyard Sunset Panorama II.jpg" title="">
+								<img src="thumbs/MarthasVineyard/036 Marthas Vineyard Sunset Panorama II.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:298</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/MarthasVineyard/037 Marthas Vineyard Fishing Boats.jpg" title="">
+								<img src="thumbs/MarthasVineyard/037 Marthas Vineyard Fishing Boats.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/MarthasVineyard/038 Marthas Vineyard Starry Sky II.JPG" title="">
+								<img src="thumbs/MarthasVineyard/038 Marthas Vineyard Starry Sky II.JPG" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:319;;height:480</span>
+						</li>
+						
+				</ul>
+				<div class="clear"></div>
+			</div>					
+			<img class="hide" id="right_arrow" src="res/right.png" alt="Scroll right" title="Scroll right" />
+			<img class="hide" src="res/right-fast.png" id="right_fast_arrow" alt="Scroll right (fast)" title="Scroll right (fast)" />
+			<div class="clear"></div>
+		</div>
+		<div class="clear"></div>
+	<div class="clear"></div>	
+</div>
+<div class="clear"></div>
+		
+			<script type="text/javascript">
+				_jaWidgetBarColor = "white";
+			</script>
+		
+	<div id="jalbumwidgetcontainer"></div>
+<script type="text/javascript" charset="utf-8"><!--//--><![CDATA[//><!--
+_jaSkin = "Galleria";
+_jaStyle = "Light.css";
+_jaVersion = "10.5";
+_jaGeneratorType = "desktop";
+_jaLanguage = "en";
+_jaPageType = "index";
+_jaRootPath = ".";
+_jaGuid = "1332895002630";
+var script = document.createElement("script");
+script.type = "text/javascript";
+script.src = "http://jalbum.net/widgetapi/load.js";
+document.getElementById("jalbumwidgetcontainer").appendChild(script);
+//--><!]]></script>
+<SCRIPT TYPE="text/javascript"> 
+<!-- 
+//Disable right click script 
+var message="Sorry, right-click has been disabled"; 
+function clickIE() {if (document.all) {(message);return false;}} 
+function clickNS(e) {if 
+(document.layers||(document.getElementById&&!document.all)) { 
+if (e.which==2||e.which==3) {(message);return false;}}} 
+if (document.layers) 
+{document.captureEvents(Event.MOUSEDOWN);document.onmousedown=clickNS;} 
+else{document.onmouseup=clickNS;document.oncontextmenu=clickIE;} 
+document.oncontextmenu=new Function("return false") 
+// --> 
+</SCRIPT>
+</body>
+</html>

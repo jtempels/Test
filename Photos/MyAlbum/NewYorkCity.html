@@ -1,0 +1,693 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">	
+	<head>
+		<title>New York City</title>
+				
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="title" content="New York City" />
+<meta name="keywords" content="New York City, New York City, jAlbum 10, Galleria" />
+<meta name="description" content="New York City" />
+<meta property="og:title" content="New York City" />
+<meta property="og:site_name" content="Jalbum" />
+<meta property="fb:app_id" content="140299612674733" />
+		<link href="res/galleria/galleria.css" rel="stylesheet" type="text/css" />
+		<link href="res/index.css" rel="stylesheet" type="text/css" />		
+		<link href="res/common.css" rel="stylesheet" type="text/css" />
+		<style type="text/css">
+	.thumbnails li {
+		width: 40px;
+		height: 40px;
+	}
+
+	#middle_container {
+		height: 510px;
+	}
+
+	#scroller_container {
+		margin-top: 20px;
+		margin-bottom: 10px;
+		width: 892px;	
+	}
+
+	#image_scroller {
+		margin: 0 10px 0 20px;
+		width: 702px;
+	}
+	
+	#thumbnails_container {
+		width: 2502px;
+	}
+	
+	#scroller_container,
+	#image_scroller,
+	#thumbnails_container {
+		height: 52px;
+	}
+	
+	#folders_container {
+		;
+	}		
+	
+	.folders {
+		width: 0px;
+	}
+	
+	.folders li {
+		width: 56px;
+		height: 56px;
+	}
+	
+	.caption,
+	.description {
+		width: 702px;
+	}
+</style>
+		<script src="res/jquery.js" type="text/javascript"></script>
+			<script src="res/jquery.hotkeys.js" type="text/javascript"></script>
+	<script src="res/galleria/jquery.galleria.js" type="text/javascript"></script>
+	<script src="res/jquery.scrollimages.js" type="text/javascript"></script>	
+	<script type="text/javascript"><!--//--><![CDATA[//><!--	
+		$(function() {
+			$("#thumbnails_container").imageScroller({
+				onBeforeScroll: function() { $.galleria.stop() },
+				onScroll: function() { $.galleria.start() }, 
+				duration: 120, 
+				imageWidth: 50, 
+				size: 14,
+				fastSteps: 14
+			});
+			
+			var formattedThumbnailOpacity = 67/100;
+			
+			$(".thumbnails_unstyled").addClass("thumbnails");
+			$("ul.thumbnails").galleria({
+				history: false,
+				clickNext: true,
+				insert: "#main_image",
+				onImage: function(image, caption, thumb) {
+					var extras = $("#extras").css("display", "none").empty();
+					image.css("display", "none").fadeIn(1025);
+					caption.css("display", "none").fadeIn(1025);
+					
+					if (false) {
+						var extrasList = $("<ul></ul>");
+						extrasList.addMetadata("Date", thumb.data("originalDate"));
+						extrasList.addMetadata("Camera", thumb.data("cameraModel"));
+						extrasList.addMetadata("Exposure time", thumb.data("exposureTime"));
+						extrasList.addMetadata("ISO", thumb.data("isoEquivalent"));
+						extrasList.addMetadata("Aperture", thumb.data("aperture"));
+						extrasList.addMetadata("Focus distance", thumb.data("focusDistance"));
+						extrasList.addMetadata("Focal length", thumb.data("focalLength35mm"));
+						extrasList.addMetadata("Keywords", thumb.data("keywords"));
+						if (extrasList.children().length > 0) {
+							extras.append(extrasList);						
+							extrasList.find(":first-child").addClass("first");
+							extras.css({ 
+								width : (image.outerWidth() - (5 * 2) + 100) + "px" 
+							}).fadeIn(1025);
+						}
+					}
+					
+					var li = thumb.parents("li");
+					li.siblings().children("img.selected").fadeTo(500, formattedThumbnailOpacity);
+					thumb.fadeTo("fast", 1).addClass("selected");
+					image.attr("title", "Next image");
+					
+					var original = thumb.data("original");
+					if (original) {
+						var originalLink = $("<a></a>").attr("href", original).text("Download original");
+						caption.append(" (").append(originalLink).append(")");
+					}
+				},
+				onThumb: function(thumb) {
+					var li = thumb.parents("li");
+					var fadeTo = li.is(".active") ? "1" : formattedThumbnailOpacity;
+					thumb.css({display: "none", opacity: fadeTo}).fadeIn(1500);
+					thumb.hover(
+						function() { 
+							thumb.fadeTo("fast", 1);		
+						},
+						function() {
+							li.not(".active").children("img").fadeTo("fast", formattedThumbnailOpacity);
+						}
+					)
+				},
+				preloads: 3,
+				fastSteps: 14,
+				onPrev: function() {
+					$.imageScroller.scrollLeft();
+				},
+				onNext: function() {
+					$.imageScroller.scrollRight();
+				},
+				onPrevFast: function() {
+					$.imageScroller.fastScrollLeft();
+				},
+				onNextFast: function() {
+					$.imageScroller.fastScrollRight();
+				},
+				enableSlideshow : false,
+				autostartSlideshow : false,
+				slideshowDelay : 3000,
+				onSlideshowPlayed : function() {
+					$('.play').hide();
+					$('.pause').show();	
+				},
+				onSlideshowPaused : function() {
+					$('.play').show();
+					$('.pause').hide();
+				}
+			});
+			
+			$.galleria.loader = $("<div></div>").addClass("loader").append($(new Image()).attr("src","res/loader.gif").attr("title","Loading..."));
+			
+			prepareArrow = function(arrow) {
+				arrow.css({display: "none", opacity: 0.5, "padding-top": "0px"}).fadeIn( 1000);			
+				arrow.hover(
+					function() {
+						arrow.fadeTo("fast", 1);
+					},
+					function() {
+						arrow.fadeTo("fast", 0.5);			
+					}
+				);	
+			}
+			
+			var leftArrow = $("#left_arrow");
+			prepareArrow(leftArrow);
+			leftArrow.click(function() {
+				$.galleria.prev();	
+			});
+			
+			var rightArrow = $("#right_arrow");
+			prepareArrow(rightArrow);
+			rightArrow.click(function() {
+				$.galleria.next();
+			});
+			
+			if (true) {
+				var leftFastArrow = $("#left_fast_arrow");
+				prepareArrow(leftFastArrow);
+				leftFastArrow.click(function() {
+					$.galleria.prevFast();
+				});
+				
+				var rightFastArrow = $("#right_fast_arrow");
+				prepareArrow(rightFastArrow);
+				rightFastArrow.click(function() {
+					$.galleria.nextFast();
+				});
+			}
+		});
+
+		$(document).bind("keydown", "left", function() {
+			if (!KeyboardNavigation.widgetHasFocus()) {
+				$.galleria.prev();
+			}
+		});
+		$(document).bind("keydown", "right", function() {
+			if (!KeyboardNavigation.widgetHasFocus()) {
+				$.galleria.next();
+			}
+		});
+		$(document).bind("keydown", "space", function() {
+			if (!KeyboardNavigation.widgetHasFocus()) {
+				$.galleria.toggleSlideshow();
+			}
+		});
+
+		var KeyboardNavigation = {
+			widgetHasFocus: function() {
+				if(typeof _jaWidgetFocus != 'undefined' && _jaWidgetFocus) {
+					return true;
+				}
+				return false;
+			}
+		}
+	//--><!]]></script>
+
+	</head>
+	<body>
+		<div id="header">
+			<div id="top_container" class="border">
+					
+			</div>
+				
+		</div>
+<div id="main">
+			<div id="middle_container">
+				<div id="main_image"></div>
+				<div id="extras"></div>
+			</div>
+		<div id="scroller_container">
+			<img class="hide" src="res/left-fast.png" id="left_fast_arrow" alt="Scroll left (fast)" title="Scroll left (fast)" />
+			<img class="hide" id="left_arrow" src="res/left.png" alt="Scroll left" title="Scroll left" />					
+			<div id="image_scroller">
+				<ul id="thumbnails_container" class="thumbnails_unstyled">
+						<li class="active">
+							
+							<a href="slides/NewYorkCity/001 New York City Lightning.jpg" title="">
+								<img src="thumbs/NewYorkCity/001 New York City Lightning.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/NewYorkCity/002 New York City Hudson Fireworks II.jpg" title="">
+								<img src="thumbs/NewYorkCity/002 New York City Hudson Fireworks II.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:319;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/NewYorkCity/003 New York City Timesquare.jpg" title="">
+								<img src="thumbs/NewYorkCity/003 New York City Timesquare.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/NewYorkCity/004 New York City Wish Upon a Star.jpg" title="">
+								<img src="thumbs/NewYorkCity/004 New York City Wish Upon a Star.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/NewYorkCity/005 New York City Hudson Sunset II.jpg" title="">
+								<img src="thumbs/NewYorkCity/005 New York City Hudson Sunset II.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:426</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/NewYorkCity/006 New York City Brooklyn Bridge Perspective.jpg" title="">
+								<img src="thumbs/NewYorkCity/006 New York City Brooklyn Bridge Perspective.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/NewYorkCity/007 New York City Fog at Night.jpg" title="">
+								<img src="thumbs/NewYorkCity/007 New York City Fog at Night.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/NewYorkCity/008 New York City Taxi at Times Square.jpg" title="">
+								<img src="thumbs/NewYorkCity/008 New York City Taxi at Times Square.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:319;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/NewYorkCity/009 New York City Brooklyn Bridge Black and White.jpg" title="">
+								<img src="thumbs/NewYorkCity/009 New York City Brooklyn Bridge Black and White.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:308;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/NewYorkCity/010 New York City NYC PANO Online.JPG" title="">
+								<img src="thumbs/NewYorkCity/010 New York City NYC PANO Online.JPG" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:237</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/NewYorkCity/011 New York City Brooklyn Bridge Cables II.jpg" title="">
+								<img src="thumbs/NewYorkCity/011 New York City Brooklyn Bridge Cables II.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:319;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/NewYorkCity/012 New York City Downtown at Night.jpg" title="">
+								<img src="thumbs/NewYorkCity/012 New York City Downtown at Night.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:319;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/NewYorkCity/013 New York City Horse Cops.jpg" title="">
+								<img src="thumbs/NewYorkCity/013 New York City Horse Cops.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:426</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/NewYorkCity/014 New York City Taxis at Times Square.jpg" title="">
+								<img src="thumbs/NewYorkCity/014 New York City Taxis at Times Square.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/NewYorkCity/015 New York City Hudson at Sun Down.jpg" title="">
+								<img src="thumbs/NewYorkCity/015 New York City Hudson at Sun Down.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/NewYorkCity/016 New York City Hudson Sunset.jpg" title="">
+								<img src="thumbs/NewYorkCity/016 New York City Hudson Sunset.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:426</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/NewYorkCity/017 New York City Red Steps.jpg" title="">
+								<img src="thumbs/NewYorkCity/017 New York City Red Steps.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:279;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/NewYorkCity/018 New York City Brooklyn Bridge Lines.jpg" title="">
+								<img src="thumbs/NewYorkCity/018 New York City Brooklyn Bridge Lines.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:319;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/NewYorkCity/019 New York City Building Portrait Black and White.jpg" title="">
+								<img src="thumbs/NewYorkCity/019 New York City Building Portrait Black and White.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:319;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/NewYorkCity/020 New York City Brooklyn Bridge Cables III.jpg" title="">
+								<img src="thumbs/NewYorkCity/020 New York City Brooklyn Bridge Cables III.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:319;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/NewYorkCity/021 New York City Thanksgiving Maybe0001.JPG" title="">
+								<img src="thumbs/NewYorkCity/021 New York City Thanksgiving Maybe0001.JPG" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/NewYorkCity/022 New York City Brooklyn Bridge Cables.jpg" title="">
+								<img src="thumbs/NewYorkCity/022 New York City Brooklyn Bridge Cables.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:319;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/NewYorkCity/023 New York City Statue Portrait.jpg" title="">
+								<img src="thumbs/NewYorkCity/023 New York City Statue Portrait.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:319;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/NewYorkCity/024 New York City Brooklyn Bridge Vertical Panorama.jpg" title="">
+								<img src="thumbs/NewYorkCity/024 New York City Brooklyn Bridge Vertical Panorama.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:285;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/NewYorkCity/025 New York City Times Square Hustle II.jpg" title="">
+								<img src="thumbs/NewYorkCity/025 New York City Times Square Hustle II.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/NewYorkCity/026 New York City Times Square Hustle.jpg" title="">
+								<img src="thumbs/NewYorkCity/026 New York City Times Square Hustle.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/NewYorkCity/027 New York City Bridge Panorama.jpg" title="">
+								<img src="thumbs/NewYorkCity/027 New York City Bridge Panorama.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:168</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/NewYorkCity/028 New York City Court BW.jpg" title="">
+								<img src="thumbs/NewYorkCity/028 New York City Court BW.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:319;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/NewYorkCity/029 New York City Fireboat on Hudson.jpg" title="">
+								<img src="thumbs/NewYorkCity/029 New York City Fireboat on Hudson.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:319;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/NewYorkCity/030 New York City George Washington Bridge.jpg" title="">
+								<img src="thumbs/NewYorkCity/030 New York City George Washington Bridge.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/NewYorkCity/031 New York City Hudson at Night.jpg" title="">
+								<img src="thumbs/NewYorkCity/031 New York City Hudson at Night.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/NewYorkCity/032 New York City Hudson Fireworks III.jpg" title="">
+								<img src="thumbs/NewYorkCity/032 New York City Hudson Fireworks III.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/NewYorkCity/033 New York City Hudson Fireworks IV.jpg" title="">
+								<img src="thumbs/NewYorkCity/033 New York City Hudson Fireworks IV.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/NewYorkCity/034 New York City Hudson Fireworks V.jpg" title="">
+								<img src="thumbs/NewYorkCity/034 New York City Hudson Fireworks V.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/NewYorkCity/035 New York City Hudson Fireworks VI.jpg" title="">
+								<img src="thumbs/NewYorkCity/035 New York City Hudson Fireworks VI.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/NewYorkCity/036 New York City Hudson Fireworks VII.jpg" title="">
+								<img src="thumbs/NewYorkCity/036 New York City Hudson Fireworks VII.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:319;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/NewYorkCity/037 New York City Hudson Fireworks.jpg" title="">
+								<img src="thumbs/NewYorkCity/037 New York City Hudson Fireworks.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:319;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/NewYorkCity/038 New York City Hudson Sunset III.jpg" title="">
+								<img src="thumbs/NewYorkCity/038 New York City Hudson Sunset III.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:426</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/NewYorkCity/039 New York City Night Blur.jpg" title="">
+								<img src="thumbs/NewYorkCity/039 New York City Night Blur.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/NewYorkCity/040 New York City Starry Columbus Circle.jpg" title="">
+								<img src="thumbs/NewYorkCity/040 New York City Starry Columbus Circle.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:319;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/NewYorkCity/041 New York City Stars at Time Warner.jpg" title="">
+								<img src="thumbs/NewYorkCity/041 New York City Stars at Time Warner.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:319;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/NewYorkCity/042 New York City Red Bricks.jpg" title="">
+								<img src="thumbs/NewYorkCity/042 New York City Red Bricks.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:319;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/NewYorkCity/043 New York City Subway Faded.jpg" title="">
+								<img src="thumbs/NewYorkCity/043 New York City Subway Faded.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:319;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/NewYorkCity/044 New York City Subway.jpg" title="">
+								<img src="thumbs/NewYorkCity/044 New York City Subway.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:319;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/NewYorkCity/045 New York City Sunrays on Hudson.jpg" title="">
+								<img src="thumbs/NewYorkCity/045 New York City Sunrays on Hudson.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/NewYorkCity/046 New York City Red City Sky.jpg" title="">
+								<img src="thumbs/NewYorkCity/046 New York City Red City Sky.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/NewYorkCity/047 New York City Street Dog Portrait.jpg" title="">
+								<img src="thumbs/NewYorkCity/047 New York City Street Dog Portrait.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:319;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/NewYorkCity/048 New York City Street Fairy.jpg" title="">
+								<img src="thumbs/NewYorkCity/048 New York City Street Fairy.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:365;;height:480</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/NewYorkCity/049 New York City Building Silhouettes.jpg" title="">
+								<img src="thumbs/NewYorkCity/049 New York City Building Silhouettes.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:640;;height:425</span>
+						</li>
+						
+						<li class="">
+							
+							<a href="slides/NewYorkCity/050 New York City City at Dusk.jpg" title="">
+								<img src="thumbs/NewYorkCity/050 New York City City at Dusk.jpg" alt="" title="" style="width: 40px; height: 40px;" />
+							</a>
+							<span>width:319;;height:480</span>
+						</li>
+						
+				</ul>
+				<div class="clear"></div>
+			</div>					
+			<img class="hide" id="right_arrow" src="res/right.png" alt="Scroll right" title="Scroll right" />
+			<img class="hide" src="res/right-fast.png" id="right_fast_arrow" alt="Scroll right (fast)" title="Scroll right (fast)" />
+			<div class="clear"></div>
+		</div>
+		<div class="clear"></div>
+	<div class="clear"></div>	
+</div>
+<div class="clear"></div>
+		
+			<script type="text/javascript">
+				_jaWidgetBarColor = "white";
+			</script>
+		
+	<div id="jalbumwidgetcontainer"></div>
+<script type="text/javascript" charset="utf-8"><!--//--><![CDATA[//><!--
+_jaSkin = "Galleria";
+_jaStyle = "Light.css";
+_jaVersion = "10.5";
+_jaGeneratorType = "desktop";
+_jaLanguage = "en";
+_jaPageType = "index";
+_jaRootPath = ".";
+_jaGuid = "1332895002630";
+var script = document.createElement("script");
+script.type = "text/javascript";
+script.src = "http://jalbum.net/widgetapi/load.js";
+document.getElementById("jalbumwidgetcontainer").appendChild(script);
+//--><!]]></script>
+<SCRIPT TYPE="text/javascript"> 
+<!-- 
+//Disable right click script 
+var message="Sorry, right-click has been disabled"; 
+function clickIE() {if (document.all) {(message);return false;}} 
+function clickNS(e) {if 
+(document.layers||(document.getElementById&&!document.all)) { 
+if (e.which==2||e.which==3) {(message);return false;}}} 
+if (document.layers) 
+{document.captureEvents(Event.MOUSEDOWN);document.onmousedown=clickNS;} 
+else{document.onmouseup=clickNS;document.oncontextmenu=clickIE;} 
+document.oncontextmenu=new Function("return false") 
+// --> 
+</SCRIPT>
+</body>
+</html>

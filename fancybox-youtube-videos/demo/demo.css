@@ -1,0 +1,39 @@
+
+
+/* WebDesignAndSuch.com Demo */
+
+/* demo page styles */
+body {
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:13px;
+	background:url(back.png);
+	margin: 0; 
+	padding: 0;
+	color: #000;
+}
+
+#container {
+	width: 780px;  
+	background:#fff;
+	margin: 0 auto; 
+	-webkit-box-shadow: 0px 0px 15px #000;
+	-moz-box-shadow: 0px 0px 15px #000;
+	padding-bottom:30px
+}
+#content {padding: 0 20px; text-align:center; line-height:18px }
+
+img {border:0px;}
+
+a:link, a:visited {color:#88b0dc; text-decoration:none}
+a:hover, a:active {color:#CC5500; text-decoration:none}
+
+.info {width:800px; margin:0 auto;  margin-top:20px; text-align:center; font-size:12px; padding-bottom:25px;}
+.info a, .info a:visited {color:#333}
+.info a:hover {color:#000}
+
+
+
+/* demo specific styles */
+.gal {text-align:center}
+.gal img {margin:10px}
+.gal img:hover {-webkit-box-shadow: 0px 0px 5px #333;-moz-box-shadow: 0px 0px 5px #333;}

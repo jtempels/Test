@@ -50,7 +50,7 @@ $(document).ready(function() {
 	$(".menuHead, .subMenuItem").hover(function() {		
 		$(this).toggleClass("hoverOn");
 	});
-
+	
 
 	// Function to handle non submenu heads being clicked
 

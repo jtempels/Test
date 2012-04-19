@@ -126,6 +126,15 @@ body {
 	margin-right:80px;	
 }
 
+.video { 
+text-decoration:none;
+color:#000;
+
+}
+
+.video:hover {
+color:#F00;	
+}
 .video img {border:2px solid #eee; margin:8px}
 .video img:hover {-webkit-box-shadow: 0px 0px 4px #000; 
 -moz-box-shadow: 0px 0px 4px #000;}

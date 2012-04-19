@@ -66,7 +66,7 @@ $(document).ready(function() {
 					menuHeadClick(this);
 					hideOthers(this);
 					$("#album").attr('src','Homepage2/album/Home.html');
-					$(".HomeContent").fadeIn(1000);
+					$(".HomeContent").show(1000);
 					break;
 				case "Australia": 
 					submenuHeadClick(this);
@@ -78,7 +78,7 @@ $(document).ready(function() {
 					submenuHeadClick(this);
 					hideOthers(this);
 					$("#CaliforniaFrame").attr('src','Photos/MyAlbum/California.html');
-					$(".CaliforniaContent").fadeIn(1000);
+					$(".CaliforniaContent").show(1000);
 					break;
 				case "France": 
 					submenuHeadClick(this);
@@ -88,58 +88,58 @@ $(document).ready(function() {
 					menuHeadClick(this);
 					hideOthers(this);
 					$("#JoshuaTreeFrame").attr('src','Photos/MyAlbum/JoshuaTree.html');
-					$(".JoshuaTreeContent").fadeIn(1000);
+					$(".JoshuaTreeContent").show(1000);
 					break;
 				case "London": 
 					//submenuHeadClick(this);
 					menuHeadClick(this);
 					hideOthers(this);
 					$("#LondonFrame").attr('src','Photos/MyAlbum/London.html');
-					$(".LondonContent").fadeIn(1000);
+					$(".LondonContent").show(1000);
 					break;
 				case "MarthasVineyard": 
 					//submenuHeadClick(this);
 					menuHeadClick(this);
 					hideOthers(this);
 					$("#MarthasVineyardFrame").attr('src','Photos/MyAlbum/MarthasVineyard.html');
-					$(".MarthasVineyardContent").fadeIn(1000);
+					$(".MarthasVineyardContent").show(1000);
 					break;
 				case "NewYorkCity": 
 					//submenuHeadClick(this);
 					menuHeadClick(this);
 					hideOthers(this);
 					$("#NewYorkCityFrame").attr('src','Photos/MyAlbum/NewYorkCity.html');
-					$(".NewYorkCityContent").fadeIn(1000);
+					$(".NewYorkCityContent").show(1000);
 					break;
 				case "NewZealand": 
 					//submenuHeadClick(this);
 					menuHeadClick(this);
 					hideOthers(this);
 					$("#NewZealandFrame").attr('src','Photos/MyAlbum/NewZealand.html');
-					$(".NewZealandContent").fadeIn(1000);
+					$(".NewZealandContent").show(1000);
 					break;
 				case "Weddings": 
 					//submenuHeadClick(this);
 					menuHeadClick(this);
 					hideOthers(this);
 					$("#WeddingsFrame").attr('src','Photos/MyAlbum/Wedding.html');
-					$(".WeddingsContent").fadeIn(1000);
+					$(".WeddingsContent").show(1000);
 					break;
 				case "Timelapses": 
 					submenuHeadClick(this);
 					hideOthers(this);
-					$(".TimelapsesContent").fadeIn(1000);
+					$(".TimelapsesContent").show(1000);
 					break;
 				case "AboutUs": 
 					//submenuHeadClick(this);
 					menuHeadClick(this);
 					hideOthers(this);
-					$(".AboutUsContent").fadeIn(1000);
+					$(".AboutUsContent").show(1000);
 					break;
 				case "ContactUs": 
 					submenuHeadClick(this);
 					hideOthers(this);
-					$(".ContactUsContent").fadeIn(1000);
+					$(".ContactUsContent").show(1000);
 					break;
 			}});	
 			
@@ -152,63 +152,68 @@ $(document).ready(function() {
 				submenuItemClick(this);
 				hideOthers(this);
 				$("#AustraliaUnderwaterFrame").attr('src','Photos/MyAlbum/AustraliaUnderwater.html');
-				$(".AustraliaUnderwaterContent").fadeIn(1000);
+				$(".AustraliaUnderwaterContent").show(1000);
 				selectedContent = "AustraliaUnderwater";
 				break;
 			case "AustraliaPlaces": 			
 				submenuItemClick(this);
 				hideOthers(this);
 				$("#AustraliaPlacesFrame").attr('src',"Photos/MyAlbum/AustraliaPlaces.html");
-				$(".AustraliaPlacesContent").fadeIn(1000);
+				$(".AustraliaPlacesContent").show(1000);
 				selectedContent = "AustraliaPlaces";
 				break;
 			case "AustraliaWildlife": 			
 			submenuItemClick(this);
 			hideOthers(this);
 			$("#AustraliaWildlifeFrame").attr('src','Photos/MyAlbum/AustraliaWildlife.html');
-			$(".AustraliaWildlifeContent").fadeIn(1000);
+			$(".AustraliaWildlifeContent").show(1000);
 			selectedContent = "AustraliaWildlife";
 			break;
 			case "BahamasUnderwater": 
 				submenuItemClick(this);
 				hideOthers(this);
 				$("#BahamasUnderwaterFrame").attr('src','Photos/MyAlbum/BahamasUnderwater.html');
-				$(".BahamasUnderwaterContent").fadeIn(1000);
+				$(".BahamasUnderwaterContent").show(1000);
 				selectedContent = "BahamasUnderwater";
 				break;								
 			case "BahamasPlaces": 			
 				submenuItemClick(this);
 				hideOthers(this);
 				$("#BahamasPlacesFrame").attr('src','Photos/MyAlbum/BahamasScenery.html');
-				$(".BahamasPlacesContent").fadeIn(1000);
+				$(".BahamasPlacesContent").show(1000);
 				selectedContent = "BahamasPlaces";
 				break;	
 			case "Etretat": 
 				submenuItemClick(this);
 				hideOthers(this);
 				$("#EtretatFrame").attr('src','Photos/MyAlbum/Etretat.html');
-				$(".EtretatContent").fadeIn(1000);
+				$(".EtretatContent").show(1000);
 				selectedContent = "Etretat";
 				break;
 			case "Honfleur": 			
 				submenuItemClick(this);
 				hideOthers(this);
 				$("#HonfleurFrame").attr('src','Photos/MyAlbum/Honfleur.html');
-				$(".HonfleurContent").fadeIn(1000);
+				$(".HonfleurContent").show(1000);
 				selectedContent = "Honfleur";
 				break;
 			case "Paris": 			
 			submenuItemClick(this);
 			hideOthers(this);
 			$("#ParisFrame").attr('src','Photos/MyAlbum/Paris.html');
-			$(".ParisContent").fadeIn(1000);
+			$(".ParisContent").show(1000);
 			selectedContent = "Paris";
+			break;
+			case "New York City": 			
+			submenuItemClick(this);
+			//hideOthers(this);
+			selectedContent = "NewYorkCity";
 			break;
 			
 			case "Contacts": 			
 				submenuItemClick(this);
 				hideOthers(this);
-				$(".ContactUsContent").fadeIn(1000);
+				$(".ContactUsContent").show(1000);
 				selectedContent = "ContactUs";
 				break;
 			

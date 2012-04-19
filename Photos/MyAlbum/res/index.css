@@ -41,8 +41,8 @@ ul {
 }
 
 .caption {
-	display: block;
-	margin: 10px auto;
+	display:none;
+	margin: 0;
 	font-size: 12px;
 }
 
@@ -81,7 +81,6 @@ ul {
 
 #scroller_container {
 	margin: auto;
-	
 	position: relative;
 }
 
@@ -101,9 +100,9 @@ ul {
 }
 
 #top_container {
-	padding-bottom: 6px;
+	
 	border-bottom-style: solid;
-	margin: 0 0 10px 0;
+	margin:0;
 }
 
 #top_container.no_border {

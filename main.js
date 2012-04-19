@@ -151,22 +151,22 @@ $(document).ready(function() {
 			case "AustraliaUnderwater": 
 				submenuItemClick(this);
 				hideOthers(this);
-				$(".AustraliaUnderwaterContent").fadeIn(1000);
 				$("#AustraliaUnderwaterFrame").attr('src','Photos/MyAlbum/AustraliaUnderwater.html');
+				$(".AustraliaUnderwaterContent").fadeIn(1000);
 				selectedContent = "AustraliaUnderwater";
 				break;
 			case "AustraliaPlaces": 			
 				submenuItemClick(this);
 				hideOthers(this);
-				$(".AustraliaPlacesContent").fadeIn(1000);
 				$("#AustraliaPlacesFrame").attr('src',"Photos/MyAlbum/AustraliaPlaces.html");
+				$(".AustraliaPlacesContent").fadeIn(1000);
 				selectedContent = "AustraliaPlaces";
 				break;
 			case "AustraliaWildlife": 			
 			submenuItemClick(this);
 			hideOthers(this);
-			$(".AustraliaWildlifeContent").fadeIn(1000);
 			$("#AustraliaWildlifeFrame").attr('src','Photos/MyAlbum/AustraliaWildlife.html');
+			$(".AustraliaWildlifeContent").fadeIn(1000);
 			selectedContent = "AustraliaWildlife";
 			break;
 			case "BahamasUnderwater": 

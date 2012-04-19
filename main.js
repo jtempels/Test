@@ -65,6 +65,7 @@ $(document).ready(function() {
 				case "Home": 
 					menuHeadClick(this);
 					hideOthers(this);
+					$("#album").attr('src','Homepage2/album/Home.html');
 					$(".HomeContent").show(1000);
 					break;
 				case "Australia": 

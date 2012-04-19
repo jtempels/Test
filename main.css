@@ -71,7 +71,7 @@ body {
 
 .AboutUsContent,  .ContactUsContent, .AustraliaUnderwaterContent, .AustraliaPlacesContent, .AustraliaWildlifeContent, .BahamasUnderwaterContent, .BahamasPlacesContent, 
 	.EtretatContent, .HonfleurContent, .ParisContent, .JoshuaTreeContent, .LondonContent, .MarthasVineyardContent, .NewYorkCityContent,
-	 .NewZealandContent, .WeddingsContent, .CaliforniaContent, .TimelapsesContent {
+	 .NewZealandContent, .WeddingsContent, .CaliforniaContent, .TimelapsesContent, .PhotoAlbums {
 	position:relative;
 	max-width:100%;
 	font-family: "American Typewriter", Courier, monospace;
